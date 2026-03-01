@@ -4,6 +4,7 @@
     "courseTitle": "BSc (Hons) Computer Science & AI",
     "photoUrl": "IMG_3315.jpg",
     "journeyText": "My foundation in technology began with a Diploma and has rapidly evolved into my 2nd-year HND in Computer Science with Artificial Intelligence at NIBM. I thrive on solving complex computational problems, from untangling advanced mathematics to architecting robust software solutions. Whether I am developing native Android applications, integrating hardware with Arduino, or engineering web platforms, my focus is always on building applications that prioritize performance and user experience.",
+    "devFocus": "Integrating clean code with intelligent Machine Learning models and Robotics automation.",
     "contactEmail": "kanilkanchana98@gmail.com",
     "githubLink": "https://github.com/kanilkanchana"
   },
@@ -23,60 +24,27 @@
     {
       "category": "Programming & Core Concepts",
       "items": [
-        {
-          "icon": "fa-brands fa-java",
-          "name": "Java"
-        },
-        {
-          "icon": "fa-solid fa-c",
-          "name": "C++"
-        },
-        {
-          "icon": "fa-brands fa-python",
-          "name": "Python"
-        },
-        {
-          "icon": "fa-solid fa-code",
-          "name": "OOP"
-        },
-        {
-          "icon": "fa-solid fa-cubes",
-          "name": "Data Structures"
-        }
+        { "icon": "fa-brands fa-java", "name": "Java" },
+        { "icon": "fa-solid fa-c", "name": "C++" },
+        { "icon": "fa-brands fa-python", "name": "Python" },
+        { "icon": "fa-solid fa-code", "name": "OOP" },
+        { "icon": "fa-solid fa-cubes", "name": "Data Structures" }
       ]
     },
     {
       "category": "AI & Robotics",
       "items": [
-        {
-          "icon": "fa-solid fa-brain",
-          "name": "Machine Learning"
-        },
-        {
-          "icon": "fa-solid fa-filter",
-          "name": "Data Preprocessing"
-        },
-        {
-          "icon": "fa-solid fa-robot",
-          "name": "Robotics"
-        }
+        { "icon": "fa-solid fa-brain", "name": "Machine Learning" },
+        { "icon": "fa-solid fa-filter", "name": "Data Preprocessing" },
+        { "icon": "fa-solid fa-robot", "name": "Robotics" }
       ]
     },
     {
       "category": "Database & Tools",
       "items": [
-        {
-          "icon": "fa-solid fa-database",
-          "name": "SQL / MySQL/NoSQL"
-        },
-        {
-          "icon": "fa-brands fa-git-alt",
-          "name": "Git"
-        },
-        {
-          "icon": "fa-solid fa-laptop-code",
-          "name": "IntelliJ / VS Code"
-        }
+        { "icon": "fa-solid fa-database", "name": "SQL / NoSQL" },
+        { "icon": "fa-brands fa-git-alt", "name": "Git" },
+        { "icon": "fa-solid fa-laptop-code", "name": "IntelliJ / VS Code" }
       ]
     }
   ],
@@ -86,16 +54,14 @@
       "title": "Moviestream",
       "description": "A premium movie database and streaming platform built from the ground up to provide a 100% ad-free cinematic experience for users.",
       "imageUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=800&auto=format&fit=crop",
-      "linkUrl": "http://moviestream.xo.je/",
-      "linkText": "Live Demo"
+      "linkUrl": "http://moviestream.xo.je/"
     },
     {
       "id": 2,
       "title": "Moviestream (Mobile App)",
-      "description": "Moviestream is an Android streaming application currently under active development using Android Studio. The app is designed to provide a smooth, ad-free viewing experience with fast content loading and stable media playback. It integrates a custom backend for dynamic content management and secure streaming. The focus of the project is performance optimization, clean user interface design, and reliable server communication to ensure seamless entertainment on mobile devices.",
+      "description": "Android streaming application built with performance optimization, clean UI, and custom backend integration.",
       "imageUrl": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&auto=format&fit=crop",
-      "linkUrl": "https://kanilkanchana.github.io/Movie-Stream/",
-      "linkText": "About App"
+      "linkUrl": "https://kanilkanchana.github.io/Movie-Stream/"
     }
   ]
 }
