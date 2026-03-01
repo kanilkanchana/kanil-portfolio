@@ -8,15 +8,19 @@
     <style>
         :root { --bg-dark: #0f0f13; --surface: #1a1a20; --primary: #4facfe; --text-main: #ffffff; --text-muted: #a0a0ab; --border: rgba(255, 255, 255, 0.1); }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-dark); color: var(--text-main); padding: 20px; }
+        body { background-color: var(--bg-dark); color: var(--text-main); padding: 20px; padding-bottom: 100px; }
         .container { max-width: 800px; margin: 0 auto; }
         .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 25px; margin-bottom: 25px; }
         .card h2 { font-size: 18px; margin-bottom: 20px; color: var(--primary); border-bottom: 1px solid var(--border); padding-bottom: 10px; }
         .form-group { margin-bottom: 15px; }
-        label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; }
-        input, textarea { width: 100%; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px; color: white; font-size: 14px; }
-        .btn-live { width: 100%; padding: 18px; background: #2ed573; color: #000; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; position: sticky; bottom: 20px; box-shadow: 0 5px 15px rgba(46, 213, 115, 0.3); }
+        label { display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; font-weight: bold; }
+        input, textarea { width: 100%; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px; color: white; font-size: 14px; outline: none; }
+        .btn-live { width: 100%; max-width: 800px; padding: 18px; background: #2ed573; color: #000; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); box-shadow: 0 5px 15px rgba(46, 213, 115, 0.3); z-index: 100; }
         .auth-box { border-left: 4px solid #ff4757; background: rgba(255, 71, 87, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .flex-row { display: flex; gap: 15px; flex-wrap: wrap; }
+        .flex-row > div { flex: 1; min-width: 250px; }
+        .toggle-box { display: flex; align-items: center; gap: 10px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px; margin-top: 10px; }
+        .toggle-box input { width: auto; }
     </style>
 </head>
 <body>
@@ -25,32 +29,63 @@
             <label style="color:#ff4757;">GitHub Access Token</label>
             <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxx">
         </div>
+
         <div class="card">
-            <h2>1. Profile Info</h2>
-            <div class="form-group"><label>Full Name</label><input type="text" id="fullName"></div>
-            <div class="form-group"><label>Course</label><input type="text" id="courseTitle"></div>
-            <div class="form-group"><label>Photo URL</label><input type="text" id="photoUrl"></div>
-            <div class="form-group"><label>Development Focus (About Section)</label><textarea id="devFocus" rows="2"></textarea></div>
-            <div class="form-group"><label>The Journey</label><textarea id="journeyText" rows="5"></textarea></div>
+            <h2>1. Profile & Contacts</h2>
+            <div class="flex-row">
+                <div class="form-group"><label>Full Name</label><input type="text" id="fullName"></div>
+                <div class="form-group"><label>Course Title</label><input type="text" id="courseTitle"></div>
+            </div>
+            <div class="form-group"><label>Photo Filename (e.g., IMG_3315.jpg)</label><input type="text" id="photoUrl"></div>
+            
+            <div class="flex-row">
+                <div class="form-group"><label>Email</label><input type="text" id="contactEmail"></div>
+                <div class="form-group"><label>GitHub Link</label><input type="text" id="githubLink"></div>
+            </div>
+            
+            <div class="flex-row">
+                <div class="form-group"><label>LinkedIn Link</label><input type="text" id="linkedinLink"></div>
+                <div class="form-group"><label>Phone Number</label><input type="text" id="phone"></div>
+            </div>
+            <div class="toggle-box">
+                <input type="checkbox" id="showPhone">
+                <label style="margin-bottom:0;">Show Phone Number publicly</label>
+            </div>
         </div>
+
         <div class="card">
-            <h2>2. JSON Data</h2>
-            <div class="form-group"><label>Typewriter Words (Array)</label><textarea id="typewriterJson" rows="5" style="font-family:monospace;"></textarea></div>
-            <div class="form-group"><label>Skills (JSON)</label><textarea id="skillsJson" rows="10" style="font-family:monospace;"></textarea></div>
-            <div class="form-group"><label>Projects (JSON)</label><textarea id="projectsJson" rows="10" style="font-family:monospace;"></textarea></div>
+            <h2>2. About & Journey</h2>
+            <div class="form-group"><label>Development Focus</label><textarea id="devFocus" rows="3"></textarea></div>
+            <div class="form-group"><label>The Journey Text</label><textarea id="journeyText" rows="6"></textarea></div>
         </div>
+
+        <div class="card">
+            <h2>3. Content JSON</h2>
+            <div class="form-group"><label>Typewriter (JSON Array)</label><textarea id="typewriterJson" rows="4"></textarea></div>
+            <div class="form-group"><label>Skills (JSON Array)</label><textarea id="skillsJson" rows="8"></textarea></div>
+            <div class="form-group"><label>Projects (JSON Array)</label><textarea id="projectsJson" rows="8"></textarea></div>
+        </div>
+
         <button class="btn-live" id="updateBtn" onclick="pushLiveUpdate()">PUSH LIVE TO GITHUB</button>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
-            const response = await fetch('data.json');
-            const data = await response.json();
+            const res = await fetch('data.json');
+            const data = await res.json();
+            
             document.getElementById('fullName').value = data.profile.fullName;
             document.getElementById('courseTitle').value = data.profile.courseTitle;
             document.getElementById('photoUrl').value = data.profile.photoUrl;
+            document.getElementById('contactEmail').value = data.profile.contactEmail;
+            document.getElementById('githubLink').value = data.profile.githubLink;
+            document.getElementById('linkedinLink').value = data.profile.linkedinLink || "";
+            document.getElementById('phone').value = data.profile.phone || "";
+            document.getElementById('showPhone').checked = data.profile.showPhone !== false;
+            
+            document.getElementById('devFocus').value = data.profile.devFocus;
             document.getElementById('journeyText').value = data.profile.journeyText;
-            document.getElementById('devFocus').value = data.profile.devFocus || "";
+
             document.getElementById('typewriterJson').value = JSON.stringify(data.typewriterWords, null, 4);
             document.getElementById('skillsJson').value = JSON.stringify(data.skills, null, 4);
             document.getElementById('projectsJson').value = JSON.stringify(data.projects, null, 4);
@@ -60,13 +95,12 @@
             const token = document.getElementById('githubToken').value;
             const btn = document.getElementById('updateBtn');
             if(!token) return alert("Token Required!");
-            
+
             const owner = "kanilkanchana";
             const repo = "kanil-portfolio";
-            const path = "data.json";
 
             try {
-                btn.innerText = "Processing...";
+                btn.innerText = "Syncing...";
                 const finalData = {
                     profile: {
                         fullName: document.getElementById('fullName').value,
@@ -74,29 +108,32 @@
                         photoUrl: document.getElementById('photoUrl').value,
                         journeyText: document.getElementById('journeyText').value,
                         devFocus: document.getElementById('devFocus').value,
-                        contactEmail: "kanilkanchana98@gmail.com",
-                        githubLink: "https://github.com/kanilkanchana"
+                        contactEmail: document.getElementById('contactEmail').value,
+                        githubLink: document.getElementById('githubLink').value,
+                        linkedinLink: document.getElementById('linkedinLink').value,
+                        phone: document.getElementById('phone').value,
+                        showPhone: document.getElementById('showPhone').checked
                     },
                     typewriterWords: JSON.parse(document.getElementById('typewriterJson').value),
                     skills: JSON.parse(document.getElementById('skillsJson').value),
                     projects: JSON.parse(document.getElementById('projectsJson').value)
                 };
 
-                const getUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-                const getRes = await fetch(getUrl, { headers: { 'Authorization': `token ${token}` }});
-                const fileData = await getRes.json();
-                
-                const putRes = await fetch(getUrl, {
+                const url = `https://api.github.com/repos/${owner}/${repo}/contents/data.json`;
+                const getRes = await fetch(url, { headers: { 'Authorization': `token ${token}` }});
+                const file = await getRes.json();
+
+                const putRes = await fetch(url, {
                     method: 'PUT',
                     headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         message: "Admin Update",
                         content: btoa(unescape(encodeURIComponent(JSON.stringify(finalData, null, 2)))),
-                        sha: fileData.sha
+                        sha: file.sha
                     })
                 });
 
-                if(putRes.ok) alert("Live Site Updated!");
+                if(putRes.ok) alert("Live Update Successful!");
             } catch (e) { alert("Error: " + e.message); }
             finally { btn.innerText = "PUSH LIVE TO GITHUB"; }
         }
