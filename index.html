@@ -11,12 +11,11 @@
     <style>
         :root { 
             --bg-base: #030305; 
-            --bg-surface: rgba(15, 15, 18, 0.7); 
             --primary-glow: #4facfe; 
             --secondary-glow: #00f2fe; 
             --text-main: #f8f9fa; 
             --text-muted: #a0a0ab; 
-            --glass-border: rgba(255, 255, 255, 0.08); 
+            --glass-border: rgba(255, 255, 255, 0.1); 
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
@@ -26,191 +25,187 @@
             color: var(--text-main); 
             font-family: 'Inter', sans-serif; 
             overflow-x: hidden; 
-            line-height: 1.6; 
         }
 
-        /* === REFINED DYNAMIC TECH BACKGROUND === */
-        #tech-canvas {
+        /* === VISIBLE TECH BACKGROUND === */
+        #tech-bg-container {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: 0;
+            z-index: 1; /* Sits behind content (z-index 10) */
             pointer-events: none;
+            background: radial-gradient(circle at 50% 50%, #0a0a15 0%, #030305 100%);
         }
 
-        .bg-element {
+        .floating-element {
             position: absolute;
-            color: var(--primary-glow);
             font-family: 'Space Grotesk', monospace;
-            opacity: 0;
-            filter: blur(1px);
+            font-weight: bold;
+            color: var(--primary-glow);
+            opacity: 0.3; /* Increased visibility */
             animation: moveUp linear infinite;
         }
 
-        /* Neural Network Node Style for ML */
-        .ml-node {
-            width: 4px; height: 4px;
+        /* Neural Network Node Logic */
+        .neural-node {
+            width: 8px; height: 8px;
             background: var(--secondary-glow);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--secondary-glow);
+            box-shadow: 0 0 15px var(--secondary-glow);
+        }
+        .neural-node::after {
+            content: '';
+            position: absolute;
+            width: 2px; height: 100px;
+            background: linear-gradient(to top, var(--secondary-glow), transparent);
+            left: 3px; top: 8px;
+            opacity: 0.2;
         }
 
         @keyframes moveUp {
-            0% { transform: translateY(105vh) translateX(0); opacity: 0; }
-            20% { opacity: 0.15; }
-            80% { opacity: 0.15; }
-            100% { transform: translateY(-10vh) translateX(20px); opacity: 0; }
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
         }
 
-        .bg-grid {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: 1;
-            background-image: 
-                linear-gradient(rgba(79, 172, 254, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(79, 172, 254, 0.02) 1px, transparent 1px);
-            background-size: 60px 60px;
-            pointer-events: none;
-        }
-
-        /* Ensure content is always above background */
+        /* Content Layer */
         nav, section, footer { position: relative; z-index: 10; }
 
-        /* === SLOW BREATHING SKILL TAGS === */
+        /* === REFINED SKILL TAGS (SLOW & STEADY) === */
         .skill-tag { 
-            background: rgba(255, 255, 255, 0.03); 
+            background: rgba(255, 255, 255, 0.05); 
             border: 1px solid var(--glass-border); 
-            padding: 8px 16px; border-radius: 8px; 
+            padding: 10px 18px; border-radius: 8px; 
             font-size: 13px; display: inline-flex; align-items: center; gap: 8px; 
-            margin: 5px;
-            transition: all 0.5s ease;
-            animation: slowFloat 6s infinite ease-in-out; /* Slower 6s animation */
+            margin: 6px;
+            animation: gentleFloat 8s infinite ease-in-out; /* Very slow */
         }
 
-        @keyframes slowFloat {
+        @keyframes gentleFloat {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+            50% { transform: translateY(-8px); }
         }
 
         .skill-tag:hover {
-            animation-play-state: paused;
-            background: rgba(79, 172, 254, 0.15);
-            border-color: var(--primary-glow);
-            transform: scale(1.05) translateY(-2px);
+            border-color: var(--secondary-glow);
+            background: rgba(0, 242, 254, 0.1);
+            transform: scale(1.05) !important;
         }
 
-        /* --- UI ELEMENTS --- */
+        /* --- UI COMPONENTS --- */
         h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
         .gradient-text { background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        nav { position: fixed; top: 0; width: 100%; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid var(--glass-border); }
-        .logo { font-size: 22px; font-weight: 700; color: #fff; text-decoration: none; }
+        nav { position: fixed; top: 0; width: 100%; padding: 25px 10%; display: flex; justify-content: space-between; align-items: center; background: rgba(3, 3, 5, 0.85); backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid var(--glass-border); }
         
-        section { padding: 100px 10%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        .hero h1 { font-size: clamp(40px, 8vw, 70px); line-height: 1.1; }
-        .hero-avatar { width: 100px; height: 100px; border-radius: 50%; border: 2px solid var(--primary-glow); margin-bottom: 20px; object-fit: cover; display: none; }
+        section { padding: 120px 10%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+        .hero h1 { font-size: clamp(40px, 8vw, 75px); line-height: 1.1; margin-bottom: 20px; }
+        .hero-avatar { width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--primary-glow); margin-bottom: 20px; object-fit: cover; display: none; }
         
-        .glass-card { background: var(--bg-surface); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 35px; height: 100%; }
+        .glass-card { background: rgba(15, 15, 25, 0.7); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 24px; padding: 40px; }
         
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-top: 40px; }
-        .project-card { background: var(--bg-surface); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; transition: 0.4s; }
-        .project-card:hover { border-color: var(--primary-glow); transform: translateY(-8px); }
-        .project-img { height: 200px; background-size: cover; background-position: center; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 50px; }
+        .project-card { background: rgba(20, 20, 30, 0.8); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; transition: 0.4s; }
+        .project-card:hover { border-color: var(--secondary-glow); transform: translateY(-10px); }
+        .project-img { height: 220px; background-size: cover; background-position: center; }
         .project-content { padding: 25px; }
 
-        .scroll-down { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); font-size: 24px; color: var(--text-muted); animation: bounce 2s infinite; }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-10px) translateX(-50%); } }
-
-        .reveal { opacity: 0; transform: translateY(20px); transition: 1s all ease; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1.2s all ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
-    <div id="tech-canvas"></div>
-    <div class="bg-grid"></div>
+    <div id="tech-bg-container"></div>
 
     <nav>
-        <a href="#" class="logo" id="navLogo">Dev.</a>
-        <div style="display: flex; gap: 25px;">
-            <a href="#about" style="color: var(--text-muted); text-decoration: none; font-size: 14px;">About</a>
-            <a href="#projects" style="color: var(--text-muted); text-decoration: none; font-size: 14px;">Projects</a>
+        <a href="#" class="logo" id="navLogo" style="color:white; text-decoration:none; font-weight:bold; font-size:24px;">DEV</a>
+        <div style="display: flex; gap: 30px;">
+            <a href="#about" style="color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500;">ABOUT</a>
+            <a href="#projects" style="color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500;">PROJECTS</a>
         </div>
     </nav>
 
     <section class="hero" id="home">
         <div class="reveal active">
             <img id="displayPhoto" class="hero-avatar" src="" alt="Profile">
-            <div id="displayCourse" style="color: var(--secondary-glow); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;"></div>
-            <h1>Hi, I'm <span id="displayName" style="color:#fff;">User</span>.<br>I specialize in <span class="gradient-text" id="typewriter"></span></h1>
-            <p id="displayJourney" style="max-width: 600px; color: var(--text-muted); margin-top: 20px; font-size: 17px;"></p>
+            <h4 id="displayCourse" style="color: var(--secondary-glow); letter-spacing: 3px; margin-bottom: 10px; font-size: 14px;"></h4>
+            <h1>Hi, I'm <span id="displayName" style="color:#fff;">...</span>.<br>I specialize in <span class="gradient-text" id="typewriter"></span></h1>
+            <p id="displayJourney" style="max-width: 650px; color: var(--text-muted); font-size: 18px; line-height: 1.8; margin-top: 20px;"></p>
         </div>
-        <a href="#about" class="scroll-down"><i class="fa-solid fa-arrow-down"></i></a>
     </section>
 
     <section id="about">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
             <div class="glass-card reveal">
-                <h3 style="margin-bottom: 20px;">Technical Arsenal</h3>
+                <h3 style="color: var(--secondary-glow); margin-bottom: 25px;">Expertise</h3>
                 <div id="skillsContainer"></div>
             </div>
-            <div class="glass-card reveal">
-                <h3 style="margin-bottom: 20px;">Focused Areas</h3>
-                <p style="color: var(--text-muted);">Developing intelligent systems through Code, Machine Learning architectures, and Robotics integration.</p>
+            <div class="glass-card reveal" style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+                <i class="fa-solid fa-robot" style="font-size: 50px; color: var(--primary-glow); margin-bottom: 20px;"></i>
+                <h3>AI & Robotics</h3>
+                <p style="color: var(--text-muted); margin-top: 15px;">Focusing on autonomous systems, machine learning pipelines, and hardware integration.</p>
             </div>
         </div>
     </section>
 
     <section id="projects">
-        <h2 class="reveal">Featured Work</h2>
+        <h2 class="reveal" style="font-size: 36px; margin-bottom: 10px;">Portfolio</h2>
         <div class="projects-grid" id="projectsContainer"></div>
     </section>
 
-    <footer style="padding: 60px; text-align: center; border-top: 1px solid var(--glass-border);">
-        <p id="footerName" style="color: var(--text-muted); font-size: 14px;"></p>
+    <footer style="padding: 80px; text-align: center; border-top: 1px solid var(--glass-border);">
+        <p id="footerName" style="color: var(--text-muted); opacity: 0.6;"></p>
     </footer>
 
     <script>
-        // 1. REFINED BACKGROUND GENERATOR (ML, CODE, ROBOTICS)
-        function initBackground() {
-            const canvas = document.getElementById('tech-canvas');
-            const codeElements = ['{ }', '</>', '[]', '=>', 'null', 'ptr'];
-            const mlElements = ['Σ', 'μ', 'θ', 'λ', 'W', 'b'];
-            
-            // Create 40 elements for full coverage
-            for (let i = 0; i < 40; i++) {
+        // 1. RE-ENGINEERED TECH BACKGROUND (VISIBLE & SPECIFIC)
+        function initTechBackground() {
+            const container = document.getElementById('tech-bg-container');
+            // Specific content types
+            const codeTags = ['0101', 'if()', 'while{}', '</>', '[ ]', 'ptr->'];
+            const robotTags = ['⚙️', '🤖', '🦾', 'HUB'];
+            const mlTags = ['Neural', '∑', 'Entropy', 'Vector'];
+
+            for (let i = 0; i < 45; i++) {
                 const el = document.createElement('div');
-                const type = Math.random();
-                
-                if (type < 0.33) {
-                    el.className = 'bg-element';
-                    el.innerText = codeElements[Math.floor(Math.random() * codeElements.length)];
-                } else if (type < 0.66) {
-                    el.className = 'bg-element ml-node';
+                const rand = Math.random();
+
+                if (rand < 0.25) {
+                    el.className = 'floating-element';
+                    el.innerText = codeTags[Math.floor(Math.random() * codeTags.length)];
+                } else if (rand < 0.50) {
+                    el.className = 'floating-element neural-node'; // Neural Network Node
+                } else if (rand < 0.75) {
+                    el.className = 'floating-element';
+                    el.innerText = robotTags[Math.floor(Math.random() * robotTags.length)];
+                    el.style.color = '#fff'; // Robotics white highlight
                 } else {
-                    el.className = 'bg-element';
-                    el.innerText = mlElements[Math.floor(Math.random() * mlElements.length)];
+                    el.className = 'floating-element';
+                    el.innerText = mlTags[Math.floor(Math.random() * mlTags.length)];
+                    el.style.color = 'var(--secondary-glow)';
                 }
 
                 el.style.left = Math.random() * 100 + 'vw';
-                el.style.fontSize = (Math.random() * 15 + 10) + 'px';
-                el.style.animationDuration = (Math.random() * 20 + 15) + 's';
-                el.style.animationDelay = (Math.random() * 10) + 's';
-                canvas.appendChild(el);
+                el.style.fontSize = (Math.random() * 18 + 12) + 'px';
+                el.style.animationDuration = (Math.random() * 15 + 12) + 's';
+                el.style.animationDelay = (Math.random() * 8) + 's';
+                container.appendChild(el);
             }
         }
 
-        // 2. DATA LOADING & RESTORATION
+        // 2. DATA LOAD & RESTORE
         let typewriterWords = [];
         document.addEventListener("DOMContentLoaded", () => {
-            initBackground();
+            initTechBackground();
             fetch('data.json')
                 .then(res => res.json())
                 .then(data => {
-                    document.getElementById('navLogo').innerText = data.profile.fullName.split(' ')[0] + '.';
+                    document.getElementById('navLogo').innerText = data.profile.fullName.split(' ')[0].toUpperCase();
                     document.getElementById('displayName').innerText = data.profile.fullName;
                     document.getElementById('displayCourse').innerText = data.profile.courseTitle;
                     document.getElementById('displayJourney').innerText = data.profile.journeyText;
-                    document.getElementById('footerName').innerText = `© ${new Date().getFullYear()} ${data.profile.fullName}`;
+                    document.getElementById('footerName').innerText = data.profile.fullName;
                     
                     if(data.profile.photoUrl) {
                         const img = document.getElementById('displayPhoto');
@@ -218,32 +213,31 @@
                         img.style.display = 'block';
                     }
 
-                    typewriterWords = data.typewriterWords || ["Software Engineering"];
+                    typewriterWords = data.typewriterWords || ["AI Specialist"];
                     startTypewriter();
 
-                    // Skills Rendering
-                    const skillContainer = document.getElementById('skillsContainer');
+                    // Render Skills
+                    const skillCont = document.getElementById('skillsContainer');
                     data.skills.forEach(cat => {
-                        let div = document.createElement('div');
-                        div.style.marginBottom = "20px";
-                        div.innerHTML = `<small style="color:var(--primary-glow); display:block; margin-bottom:8px; font-weight:bold;">${cat.category}</small>`;
+                        let html = `<div style="margin-bottom:20px"><strong style="color:var(--primary-glow); font-size:12px; display:block; margin-bottom:10px;">${cat.category}</strong>`;
                         cat.items.forEach(s => {
-                            const delay = (Math.random() * -5).toFixed(2);
-                            div.innerHTML += `<span class="skill-tag" style="animation-delay: ${delay}s;"><i class="${s.icon}"></i> ${s.name}</span>`;
+                            const delay = (Math.random() * -8).toFixed(1);
+                            html += `<span class="skill-tag" style="animation-delay: ${delay}s;"><i class="${s.icon}"></i> ${s.name}</span>`;
                         });
-                        skillContainer.appendChild(div);
+                        html += `</div>`;
+                        skillCont.innerHTML += html;
                     });
 
-                    // Projects Rendering
-                    const projContainer = document.getElementById('projectsContainer');
+                    // Render Projects
+                    const projCont = document.getElementById('projectsContainer');
                     data.projects.forEach(p => {
-                        projContainer.innerHTML += `
+                        projCont.innerHTML += `
                             <div class="project-card reveal">
                                 <div class="project-img" style="background-image: url('${p.imageUrl}')"></div>
                                 <div class="project-content">
-                                    <h4>${p.title}</h4>
-                                    <p style="font-size:13px; color:var(--text-muted); margin: 15px 0;">${p.description}</p>
-                                    <a href="${p.linkUrl}" target="_blank" style="color:var(--primary-glow); text-decoration:none; font-size:14px; font-weight:600;">Explore <i class="fa-solid fa-arrow-right"></i></a>
+                                    <h4 style="font-size:20px; margin-bottom:10px;">${p.title}</h4>
+                                    <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">${p.description}</p>
+                                    <a href="${p.linkUrl}" target="_blank" style="color:var(--secondary-glow); text-decoration:none; font-weight:bold; font-size:14px;">VIEW CASE STUDY →</a>
                                 </div>
                             </div>
                         `;
@@ -255,18 +249,16 @@
         let wordIdx = 0, charIdx = 0, isDeleting = false;
         function startTypewriter() {
             const el = document.getElementById('typewriter');
-            if(!el) return;
             const current = typewriterWords[wordIdx];
             el.textContent = isDeleting ? current.substring(0, charIdx - 1) : current.substring(0, charIdx + 1);
             charIdx = isDeleting ? charIdx - 1 : charIdx + 1;
-
-            let speed = isDeleting ? 40 : 100;
-            if (!isDeleting && charIdx === current.length) { speed = 2000; isDeleting = true; }
-            else if (isDeleting && charIdx === 0) { isDeleting = false; wordIdx = (wordIdx + 1) % typewriterWords.length; speed = 500; }
+            let speed = isDeleting ? 40 : 120;
+            if (!isDeleting && charIdx === current.length) { speed = 2500; isDeleting = true; }
+            else if (isDeleting && charIdx === 0) { isDeleting = false; wordIdx = (wordIdx + 1) % typewriterWords.length; speed = 600; }
             setTimeout(startTypewriter, speed);
         }
 
-        // 4. SCROLL ANIMATION
+        // 4. SCROLL REVEAL
         window.addEventListener('scroll', () => {
             document.querySelectorAll('.reveal').forEach(el => {
                 if (el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add('active');
