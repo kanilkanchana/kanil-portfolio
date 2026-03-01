@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>Kanil Kanchana | Portfolio</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -29,62 +29,54 @@
             line-height: 1.6; 
         }
 
-        /* PREMIUM ANIMATED BACKGROUND */
-        .bg-container {
+        /* === NEW TECH / ML / ROBOTICS BACKGROUND === */
+        /* Fixed z-index to 0 so it's guaranteed to be visible behind the content (z-index: 10) */
+        .tech-bg {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -2;
+            z-index: 0;
             overflow: hidden;
+            pointer-events: none;
             background: radial-gradient(circle at center, #0a0a10 0%, var(--bg-base) 100%);
         }
 
-        .orb {
+        .tech-symbol {
             position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
-            animation: float 20s infinite ease-in-out alternate;
+            color: var(--primary-glow);
+            font-family: 'Space Grotesk', monospace;
+            font-weight: 600;
+            opacity: 0;
+            animation: floatUp linear infinite;
+            text-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
         }
 
-        .orb-1 {
-            width: 400px; height: 400px;
-            background: rgba(79, 172, 254, 0.3);
-            top: -10%; left: -10%;
-            animation-duration: 25s;
-        }
-
-        .orb-2 {
-            width: 500px; height: 500px;
-            background: rgba(0, 242, 254, 0.2);
-            bottom: -20%; right: -10%;
-            animation-duration: 30s;
-            animation-direction: alternate-reverse;
-        }
-        
-        .orb-3 {
-            width: 300px; height: 300px;
-            background: rgba(142, 45, 226, 0.2);
-            top: 40%; left: 40%;
-            animation-duration: 35s;
-        }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-            100% { transform: translate(0, 0) scale(1); }
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) rotate(-10deg); opacity: 0; }
+            10% { opacity: 0.15; }
+            90% { opacity: 0.15; }
+            100% { transform: translateY(-10vh) rotate(10deg); opacity: 0; }
         }
 
         .bg-grid {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -1;
+            z-index: 0;
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+                linear-gradient(rgba(79, 172, 254, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(79, 172, 254, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
             pointer-events: none;
+            animation: dynamicGrid 20s linear infinite;
         }
+
+        @keyframes dynamicGrid {
+            0% { background-position: 0px 0px; }
+            100% { background-position: 50px 50px; }
+        }
+        /* =========================================== */
+
+        /* Guarantee all content sits on top of the background */
+        nav, section, footer { position: relative; z-index: 10; }
 
         h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
         .gradient-text { background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -95,7 +87,7 @@
         .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.3s; }
         .nav-links a:hover { color: var(--secondary-glow); }
         
-        section { padding: 120px 10%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; }
+        section { padding: 120px 10%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
         .section-title { font-size: 36px; margin-bottom: 50px; display: flex; align-items: center; gap: 15px; }
         .section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--glass-border), transparent); }
         
@@ -114,37 +106,44 @@
         .btn-outline { border: 1px solid var(--text-muted); color: var(--text-main); }
         .btn-outline:hover { border-color: var(--text-main); background: rgba(255,255,255,0.05); }
         
-        /* === NEW SCROLL DOWN ARROW === */
-        .scroll-down {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 28px;
-            color: var(--text-muted);
-            text-decoration: none;
-            animation: bounce 2s infinite;
-            transition: color 0.3s, text-shadow 0.3s;
-            z-index: 10;
-        }
-        .scroll-down:hover {
-            color: var(--secondary-glow);
-            text-shadow: 0 0 15px var(--secondary-glow);
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-            40% { transform: translateY(-20px) translateX(-50%); }
-            60% { transform: translateY(-10px) translateX(-50%); }
-        }
+        .scroll-down { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); font-size: 28px; color: var(--text-muted); text-decoration: none; animation: bounce 2s infinite; transition: color 0.3s, text-shadow 0.3s; z-index: 10; }
+        .scroll-down:hover { color: var(--secondary-glow); text-shadow: 0 0 15px var(--secondary-glow); }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-20px) translateX(-50%); } 60% { transform: translateY(-10px) translateX(-50%); } }
 
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; }
         .glass-card { background: var(--bg-surface); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 40px; transition: transform 0.4s, box-shadow 0.4s; }
         .glass-card:hover { transform: translateY(-5px); border-color: rgba(79, 172, 254, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        
+        /* === FIXED & UPGRADED SKILL TAGS === */
         .skill-category { margin-bottom: 20px; }
         .skill-category-title { font-size: 14px; color: var(--secondary-glow); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: 600; }
         .skills-container { display: flex; flex-wrap: wrap; gap: 10px; }
-        .skill-tag { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); padding: 8px 16px; border-radius: 6px; font-size: 13px; display: flex; align-items: center; gap: 8px; transition: all 0.3s; }
-        .skill-tag:hover { background: rgba(79, 172, 254, 0.15); border-color: var(--secondary-glow); color: var(--text-main); transform: translateY(-2px); }
+        
+        .skill-tag { 
+            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); 
+            padding: 8px 16px; border-radius: 6px; font-size: 13px; display: inline-flex; align-items: center; gap: 8px; 
+            transition: all 0.3s ease;
+            animation: floatShake 4s infinite ease-in-out; 
+            transform-origin: center;
+        }
+        
+        /* Stops the shake and pops out when you hover over it */
+        .skill-tag:hover { 
+            background: rgba(79, 172, 254, 0.15); border-color: var(--secondary-glow); color: var(--text-main); 
+            animation: none !important; /* Forces the animation to stop */
+            transform: translateY(-5px) scale(1.08) !important;
+            box-shadow: 0 10px 20px rgba(0, 242, 254, 0.2);
+        }
+
+        /* Upgraded, more noticeable shake */
+        @keyframes floatShake {
+            0%   { transform: translateY(0px) rotate(0deg); }
+            25%  { transform: translateY(-3px) rotate(1.5deg); }
+            50%  { transform: translateY(0px) rotate(0deg); }
+            75%  { transform: translateY(3px) rotate(-1.5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        /* =================================== */
         
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
         .project-card { background: var(--bg-surface); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; transition: all 0.4s; position: relative; animation: fadeUp 0.8s ease forwards; opacity: 0; }
@@ -168,11 +167,7 @@
 </head>
 <body>
 
-    <div class="bg-container">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-    </div>
+    <div class="tech-bg" id="techBg"></div>
     <div class="bg-grid"></div>
 
     <nav>
@@ -236,9 +231,33 @@
     </footer>
 
     <script>
+        // --- 1. JAVASCRIPT FOR DYNAMIC TECH BACKGROUND ---
+        function createTechBackground() {
+            const bg = document.getElementById('techBg');
+            // Tech, AI, and Coding Symbols
+            const symbols = ['{ }', '</>', '0101', '1010', 'AI', 'ML', '⚙️', '🤖', 'function()', 'null', 'O(n)', 'if(true)', '∑', '∫'];
+            
+            for(let i = 0; i < 35; i++) {
+                let el = document.createElement('div');
+                el.className = 'tech-symbol';
+                el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                
+                // Randomize position, size, and speed
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.fontSize = (Math.random() * 20 + 12) + 'px';
+                el.style.animationDuration = (Math.random() * 20 + 15) + 's';
+                el.style.animationDelay = (Math.random() * 10) + 's';
+                
+                bg.appendChild(el);
+            }
+        }
+
+        // --- 2. DATA FETCH AND ENGINE ---
         let typewriterWords = ["loading..."];
 
         document.addEventListener("DOMContentLoaded", function() {
+            createTechBackground(); // Initialize the background on load
+            
             fetch('data.json')
                 .then(response => { if (!response.ok) throw new Error(); return response.json(); })
                 .then(data => {
@@ -259,16 +278,20 @@
                         typewriterWords = data.typewriterWords;
                     }
 
+                    // Skills with Animation Injection
                     const skillsContainer = document.getElementById('skillsContainer');
                     data.skills.forEach(skillBlock => {
                         let skillHtml = `<div class="skill-category"><div class="skill-category-title">${skillBlock.category}</div><div class="skills-container">`;
                         skillBlock.items.forEach(item => {
-                            skillHtml += `<span class="skill-tag"><i class="${item.icon}"></i> ${item.name}</span>`;
+                            // Assign random delay directly to the CSS animation tag
+                            const randomDelay = (Math.random() * 2).toFixed(2);
+                            skillHtml += `<span class="skill-tag" style="animation-delay: -${randomDelay}s;"><i class="${item.icon}"></i> ${item.name}</span>`;
                         });
                         skillHtml += `</div></div>`;
                         skillsContainer.innerHTML += skillHtml;
                     });
 
+                    // Projects Injection
                     const projectsContainer = document.getElementById('projectsContainer');
                     data.projects.forEach(proj => {
                         const card = document.createElement('div');
@@ -299,6 +322,7 @@
                 .catch(err => console.error("Error loading JSON"));
         });
 
+        // --- 3. TYPEWRITER EFFECT ---
         let i = 0, charIndex = 0, isDeleting = false;
         const typeWriterElement = document.getElementById("typewriter");
 
@@ -313,7 +337,7 @@
             }
             let typeSpeed = isDeleting ? 50 : 100;
             if (!isDeleting && charIndex === currentWord.length) {
-                typeSpeed = 2000; isDeleting = true;
+                typeSpeed = 2000; is    Deleting = true;
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false; i = (i + 1) % typewriterWords.length; typeSpeed = 500;
             }
@@ -321,6 +345,7 @@
         }
         window.onload = () => setTimeout(typeEffect, 1000);
 
+        // --- 4. SCROLL REVEAL ---
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
