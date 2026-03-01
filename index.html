@@ -3,182 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Admin Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Portfolio</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
     <style>
-        :root { --bg-dark: #0f0f13; --surface: #1a1a20; --primary: #4facfe; --text-main: #ffffff; --text-muted: #a0a0ab; --border: rgba(255, 255, 255, 0.1); }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-dark); color: var(--text-main); padding: 40px 20px; }
-        .container { max-width: 800px; margin: 0 auto; }
-        .header { text-align: center; margin-bottom: 40px; }
-        .header h1 { font-size: 28px; color: var(--primary); margin-bottom: 10px; }
-        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 30px; margin-bottom: 30px; }
-        .card h2 { font-size: 18px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); color: var(--primary); }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; }
-        input, textarea { width: 100%; padding: 12px 15px; background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border); border-radius: 8px; color: white; font-size: 15px; }
-        input:focus, textarea:focus { outline: none; border-color: var(--primary); }
-        .btn-live { display: block; width: 100%; padding: 18px; background: #2ed573; color: #000; font-size: 16px; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; transition: 0.2s; position: sticky; bottom: 20px; z-index: 100; box-shadow: 0 10px 20px rgba(46, 213, 115, 0.3); }
-        .btn-live:hover { background: #26b360; transform: translateY(-2px); }
-        .auth-box { border-left: 4px solid #ff4757; background: rgba(255, 71, 87, 0.1); padding: 20px; border-radius: 0 8px 8px 0; margin-bottom: 30px; }
-        .auth-box input { border-color: #ff4757; margin-top: 10px; font-family: monospace; }
-        .help-text { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; }
+        :root { --bg-base: #050505; --bg-surface: rgba(20, 20, 22, 0.6); --primary-glow: #4facfe; --secondary-glow: #00f2fe; --text-main: #f8f9fa; --text-muted: #a0a0ab; --glass-border: rgba(255, 255, 255, 0.08); }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { background-color: var(--bg-base); color: var(--text-main); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.6; }
+        .ambient-light { position: fixed; top: -20%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(79, 172, 254, 0.15) 0%, transparent 60%); z-index: -1; pointer-events: none; }
+        .ambient-light-2 { position: fixed; bottom: -20%; right: -10%; width: 40vw; height: 40vw; background: radial-gradient(circle, rgba(0, 242, 254, 0.1) 0%, transparent 60%); z-index: -1; pointer-events: none; }
+        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        nav { position: fixed; top: 0; width: 100%; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(15px); z-index: 100; border-bottom: 1px solid var(--glass-border); }
+        .logo { font-size: 24px; font-weight: 700; color: var(--text-main); text-decoration: none; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--secondary-glow); }
+        section { padding: 120px 10%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+        .section-title { font-size: 36px; margin-bottom: 50px; display: flex; align-items: center; gap: 15px; }
+        .section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--glass-border), transparent); }
+        .hero-avatar { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--primary-glow); margin-bottom: 20px; object-fit: cover; box-shadow: 0 0 20px rgba(79, 172, 254, 0.4); display: none; }
+        .hero { align-items: flex-start; }
+        .hero-badge { background: rgba(79, 172, 254, 0.1); border: 1px solid rgba(79, 172, 254, 0.2); padding: 8px 16px; border-radius: 50px; font-size: 13px; color: var(--secondary-glow); margin-bottom: 25px; display: inline-block; }
+        .hero h1 { font-size: 65px; line-height: 1.1; margin-bottom: 20px; }
+        .hero p { font-size: 18px; color: var(--text-muted); max-width: 650px; margin-bottom: 40px; }
+        .typewriter-text { border-right: 2px solid var(--secondary-glow); padding-right: 5px; animation: blink 0.75s step-end infinite; }
+        @keyframes blink { 50% { border-color: transparent; } }
+        .btn-group { display: flex; gap: 20px; }
+        .btn { padding: 15px 30px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; font-size: 15px; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow)); color: #000; box-shadow: 0 10px 20px rgba(0, 242, 254, 0.2); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0, 242, 254, 0.4); }
+        .btn-outline { border: 1px solid var(--text-muted); color: var(--text-main); }
+        .btn-outline:hover { border-color: var(--text-main); background: rgba(255,255,255,0.05); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; }
+        .glass-card { background: var(--bg-surface); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 40px; transition: transform 0.4s; }
+        .glass-card:hover { transform: translateY(-5px); border-color: rgba(79, 172, 254, 0.3); }
+        .skill-category { margin-bottom: 20px; }
+        .skill-category-title { font-size: 14px; color: var(--secondary-glow); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: 600; }
+        .skills-container { display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-tag { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); padding: 8px 16px; border-radius: 6px; font-size: 13px; display: flex; align-items: center; gap: 8px; transition: all 0.3s; }
+        .skill-tag:hover { background: rgba(79, 172, 254, 0.1); border-color: var(--secondary-glow); color: var(--text-main); }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .project-card { background: var(--bg-surface); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; transition: all 0.4s; position: relative; animation: fadeUp 0.8s ease forwards; opacity: 0; }
+        .project-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); border-color: rgba(79, 172, 254, 0.3); }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        .project-img { height: 200px; background-size: cover; background-position: center; border-bottom: 1px solid var(--glass-border); }
+        .project-content { padding: 30px; }
+        .project-title { font-size: 22px; margin-bottom: 10px; color: var(--text-main); }
+        .project-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+        .project-links a { color: var(--secondary-glow); text-decoration: none; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        footer { text-align: center; padding: 40px; border-top: 1px solid var(--glass-border); color: var(--text-muted); font-size: 14px; }
+        @media (max-width: 900px) { .hero h1 { font-size: 45px; } .about-grid { grid-template-columns: 1fr; } nav { padding: 20px; } .nav-links { display: none; } section { padding: 100px 20px; } }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header">
-            <h1><i class="fa-solid fa-satellite-dish"></i> Live Admin Dashboard</h1>
-            <p>Your current data has been loaded. Make your edits below.</p>
-        </div>
+    <div class="ambient-light"></div>
+    <div class="ambient-light-2"></div>
 
-        <div class="auth-box">
-            <label style="color: #ff4757;"><i class="fa-solid fa-lock"></i> GitHub Personal Access Token</label>
-            <p style="font-size: 12px; color: #dcdcdc;">Paste your token here to authorize the save. It will not be stored.</p>
-            <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+    <nav>
+        <a href="#" class="logo" id="navLogo">Loading...</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
         </div>
+    </nav>
 
-        <div class="card">
-            <h2>1. Profile & Journey</h2>
-            <div class="form-group"><label>Full Name</label><input type="text" id="fullName"></div>
-            <div class="form-group"><label>Course Title & Year</label><input type="text" id="courseTitle"></div>
-            <div class="form-group"><label>Profile Photo URL</label><input type="text" id="photoUrl"></div>
-            <div class="form-group"><label>The Journey (About Me)</label><textarea id="journeyText" rows="6"></textarea></div>
+    <section class="hero" id="home">
+        <div class="reveal active">
+            <img id="displayPhoto" class="hero-avatar" src="" alt="Profile Photo">
+            <div class="hero-badge"><i class="fa-solid fa-graduation-cap"></i> <span id="displayCourse">Loading Course...</span></div>
+            <h1>Hi, I'm <span id="displayName" style="color:white;">...</span>.<br>I build <span class="gradient-text typewriter-text" id="typewriter"></span></h1>
+            <div class="btn-group">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-outline" id="btnContactEmail">Contact Me</a>
+            </div>
         </div>
+    </section>
 
-        <div class="card">
-            <h2>2. Let's Connect (Links)</h2>
-            <div class="form-group"><label>Contact Email</label><input type="text" id="contactEmail"></div>
-            <div class="form-group"><label>GitHub URL</label><input type="text" id="githubLink"></div>
+    <section id="about">
+        <h2 class="section-title reveal">Academic & Technical Profile</h2>
+        <div class="about-grid">
+            <div class="glass-card reveal">
+                <h3 style="margin-bottom: 15px; font-size: 24px;">The Journey</h3>
+                <p id="displayJourney" style="color: var(--text-muted); line-height: 1.8;">Loading bio...</p>
+            </div>
+
+            <div class="glass-card reveal">
+                <h3 style="margin-bottom: 25px; font-size: 24px;">Technical Arsenal</h3>
+                <div id="skillsContainer"></div>
+            </div>
         </div>
+    </section>
 
-        <div class="card">
-            <h2>3. Typewriter Words ("I build...")</h2>
-            <p class="help-text">Edit the JSON array below to change the typing animation text.</p>
-            <div class="form-group"><textarea id="typewriterJson" rows="6" style="font-family: monospace;"></textarea></div>
+    <section id="projects">
+        <h2 class="section-title reveal">Featured Projects</h2>
+        <div class="projects-grid" id="projectsContainer"></div>
+    </section>
+
+    <section id="contact" style="min-height: 50vh; text-align: center; align-items: center;">
+        <div class="glass-card reveal" style="max-width: 600px; width: 100%;">
+            <h2 style="font-size: 36px; margin-bottom: 20px;">Let's Connect.</h2>
+            <p style="color: var(--text-muted); margin-bottom: 30px;">Whether you want to discuss AI integration, collaborate on a new project, or just talk code, my inbox is always open.</p>
+            <a href="#" id="actionContactEmail" class="btn btn-primary" style="display: inline-block;">Say Hello</a>
+            <div style="margin-top: 30px; display: flex; justify-content: center; gap: 20px; font-size: 24px;">
+                <a href="#" id="actionGithub" target="_blank" style="color: var(--text-main); transition: 0.3s;"><i class="fa-brands fa-github"></i></a>
+            </div>
         </div>
+    </section>
 
-        <div class="card">
-            <h2>4. Technical Arsenal (Skills)</h2>
-            <p class="help-text">Edit your skill categories and icons here.</p>
-            <div class="form-group"><textarea id="skillsJson" rows="15" style="font-family: monospace;"></textarea></div>
-        </div>
-
-        <div class="card">
-            <h2>5. Featured Projects</h2>
-            <p class="help-text">Add, edit, or remove your projects here.</p>
-            <div class="form-group"><textarea id="projectsJson" rows="20" style="font-family: monospace;"></textarea></div>
-        </div>
-
-        <button class="btn-live" id="updateBtn" onclick="pushLiveUpdate()">
-            <i class="fa-solid fa-cloud-arrow-up"></i> Push Live Update to GitHub
-        </button>
-    </div>
+    <footer>
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> <span id="footerName">User</span>. Designed & Built with <i class="fa-solid fa-code" style="color: var(--primary-glow);"></i></p>
+    </footer>
 
     <script>
-        // Automatically load existing data when the admin page opens
-        document.addEventListener("DOMContentLoaded", async function() {
-            try {
-                // Fetch the live JSON file directly from your website
-                const response = await fetch('data.json');
-                if (!response.ok) throw new Error("Could not load current data.");
-                const data = await response.json();
+        let typewriterWords = ["loading..."];
 
-                // Fill in the input boxes
-                document.getElementById('fullName').value = data.profile.fullName;
-                document.getElementById('courseTitle').value = data.profile.courseTitle;
-                document.getElementById('photoUrl').value = data.profile.photoUrl;
-                document.getElementById('journeyText').value = data.profile.journeyText;
-                document.getElementById('contactEmail').value = data.profile.contactEmail;
-                document.getElementById('githubLink').value = data.profile.githubLink;
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('data.json')
+                .then(response => { if (!response.ok) throw new Error(); return response.json(); })
+                .then(data => {
+                    // Inject Basic Profile
+                    document.getElementById('navLogo').innerText = data.profile.fullName.split(' ')[0] + '.';
+                    document.getElementById('displayName').innerText = data.profile.fullName;
+                    document.getElementById('footerName').innerText = data.profile.fullName;
+                    document.getElementById('displayCourse').innerText = data.profile.courseTitle;
+                    document.getElementById('displayJourney').innerText = data.profile.journeyText;
+                    
+                    document.getElementById('displayPhoto').src = data.profile.photoUrl;
+                    document.getElementById('displayPhoto').style.display = "block"; 
+                    
+                    document.getElementById('btnContactEmail').href = "mailto:" + data.profile.contactEmail;
+                    document.getElementById('actionContactEmail').href = "mailto:" + data.profile.contactEmail;
+                    document.getElementById('actionGithub').href = data.profile.githubLink;
 
-                // Fill in the JSON text areas
-                document.getElementById('typewriterJson').value = JSON.stringify(data.typewriterWords, null, 4);
-                document.getElementById('skillsJson').value = JSON.stringify(data.skills, null, 4);
-                document.getElementById('projectsJson').value = JSON.stringify(data.projects, null, 4);
+                    // Setup Typewriter Data
+                    if (data.typewriterWords && data.typewriterWords.length > 0) {
+                        typewriterWords = data.typewriterWords;
+                    }
 
-            } catch (error) {
-                console.error("No existing data found or running locally without a server.");
-            }
+                    // Inject Skills
+                    const skillsContainer = document.getElementById('skillsContainer');
+                    data.skills.forEach(skillBlock => {
+                        let skillHtml = `<div class="skill-category"><div class="skill-category-title">${skillBlock.category}</div><div class="skills-container">`;
+                        skillBlock.items.forEach(item => {
+                            skillHtml += `<span class="skill-tag"><i class="${item.icon}"></i> ${item.name}</span>`;
+                        });
+                        skillHtml += `</div></div>`;
+                        skillsContainer.innerHTML += skillHtml;
+                    });
+
+                    // Inject Projects
+                    const projectsContainer = document.getElementById('projectsContainer');
+                    data.projects.forEach(proj => {
+                        const card = document.createElement('div');
+                        card.className = 'project-card';
+                        card.style.animationDelay = `${proj.id * 0.2}s`; 
+                        card.innerHTML = `
+                            <div class="project-img" style="background-image: url('${proj.imageUrl}');"></div>
+                            <div class="project-content">
+                                <h3 class="project-title">${proj.title}</h3>
+                                <p class="project-desc">${proj.description}</p>
+                                <div class="project-links">
+                                    <a href="${proj.linkUrl}" target="${proj.linkUrl !== '#' ? '_blank' : '_self'}">
+                                        ${proj.linkText} <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                        projectsContainer.appendChild(card);
+                    });
+                })
+                .catch(err => console.error("Error loading JSON"));
         });
 
-        // Push updates back to GitHub
-        async function pushLiveUpdate() {
-            const token = document.getElementById('githubToken').value.trim();
-            const btn = document.getElementById('updateBtn');
-            
-            if (!token) {
-                alert("Please enter your GitHub Personal Access Token!");
-                return;
+        // Typewriter Effect
+        let i = 0, charIndex = 0, isDeleting = false;
+        const typeWriterElement = document.getElementById("typewriter");
+
+        function typeEffect() {
+            const currentWord = typewriterWords[i];
+            if (isDeleting) {
+                typeWriterElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typeWriterElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
             }
+            let typeSpeed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000; isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false; i = (i + 1) % typewriterWords.length; typeSpeed = 500;
+            }
+            setTimeout(typeEffect, typeSpeed);
+        }
+        window.onload = () => setTimeout(typeEffect, 1000);
 
-            // Important: Make sure these match your actual GitHub username and repository name!
-            const owner = "kanilkanchana";
-            const repo = "kanil-portfolio";
-            const path = "data.json";
-
-            try {
-                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Pushing to GitHub...';
-                btn.style.pointerEvents = 'none';
-
-                // 1. Gather all data from the form
-                const finalDatabase = {
-                    profile: {
-                        fullName: document.getElementById('fullName').value,
-                        courseTitle: document.getElementById('courseTitle').value,
-                        photoUrl: document.getElementById('photoUrl').value,
-                        journeyText: document.getElementById('journeyText').value,
-                        contactEmail: document.getElementById('contactEmail').value,
-                        githubLink: document.getElementById('githubLink').value
-                    },
-                    typewriterWords: JSON.parse(document.getElementById('typewriterJson').value),
-                    skills: JSON.parse(document.getElementById('skillsJson').value),
-                    projects: JSON.parse(document.getElementById('projectsJson').value)
-                };
-
-                // Base64 encode the content for GitHub
-                const contentStr = JSON.stringify(finalDatabase, null, 2);
-                const encodedContent = btoa(unescape(encodeURIComponent(contentStr)));
-
-                // 2. Fetch the current SHA
-                const getUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-                const getResponse = await fetch(getUrl, {
-                    headers: { 'Authorization': `token ${token}` }
-                });
-                if (!getResponse.ok) throw new Error("Could not find the original data.json file on GitHub. Check your token.");
-                
-                const fileData = await getResponse.json();
-                const fileSha = fileData.sha;
-
-                // 3. PUT the new file to GitHub
-                const putResponse = await fetch(getUrl, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${token}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        message: "Live update from Admin Dashboard",
-                        content: encodedContent,
-                        sha: fileSha
-                    })
-                });
-
-                if (putResponse.ok) {
-                    alert("Success! Your live portfolio has been updated. Give GitHub Pages 1-2 minutes to refresh the live site.");
-                } else {
-                    throw new Error("Failed to push update. Check your token permissions.");
+        // Scroll Reveal
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                if (reveals[i].getBoundingClientRect().top < window.innerHeight - 100) {
+                    reveals[i].classList.add("active");
                 }
-
-            } catch (error) {
-                alert("Error: " + error.message + "\n\n(Tip: If there is a parsing error, check your JSON text areas to make sure you didn't miss a comma or quotation mark!)");
-            } finally {
-                btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Push Live Update to GitHub';
-                btn.style.pointerEvents = 'auto';
             }
         }
+        window.addEventListener("scroll", reveal);
+        reveal();
     </script>
 </body>
 </html>
