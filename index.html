@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Tech & AI</title>
+    <title>Portfolio | AI & Robotics</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -15,197 +15,149 @@
             --secondary-glow: #00f2fe; 
             --text-main: #f8f9fa; 
             --text-muted: #a0a0ab; 
-            --glass-border: rgba(255, 255, 255, 0.1); 
+            --glass-border: rgba(255, 255, 255, 0.08); 
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        
-        body { 
-            background-color: var(--bg-base); 
-            color: var(--text-main); 
-            font-family: 'Inter', sans-serif; 
-            overflow-x: hidden; 
-        }
+        body { background-color: var(--bg-base); color: var(--text-main); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 
-        /* === VISIBLE TECH BACKGROUND === */
-        #tech-bg-container {
+        /* === SUBTLE TECH BACKGROUND === */
+        #tech-bg {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: 1; /* Sits behind content (z-index 10) */
+            z-index: 0;
             pointer-events: none;
-            background: radial-gradient(circle at 50% 50%, #0a0a15 0%, #030305 100%);
+            opacity: 0.12; /* Very subtle transparency */
         }
-
-        .floating-element {
+        .bg-symbol {
             position: absolute;
             font-family: 'Space Grotesk', monospace;
-            font-weight: bold;
             color: var(--primary-glow);
-            opacity: 0.3; /* Increased visibility */
-            animation: moveUp linear infinite;
+            animation: driftUp linear infinite;
+        }
+        @keyframes driftUp {
+            0% { transform: translateY(110vh); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-10vh); opacity: 0; }
         }
 
-        /* Neural Network Node Logic */
-        .neural-node {
-            width: 8px; height: 8px;
-            background: var(--secondary-glow);
-            border-radius: 50%;
-            box-shadow: 0 0 15px var(--secondary-glow);
-        }
-        .neural-node::after {
-            content: '';
-            position: absolute;
-            width: 2px; height: 100px;
-            background: linear-gradient(to top, var(--secondary-glow), transparent);
-            left: 3px; top: 8px;
-            opacity: 0.2;
-        }
-
-        @keyframes moveUp {
-            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
-            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* Content Layer */
-        nav, section, footer { position: relative; z-index: 10; }
-
-        /* === REFINED SKILL TAGS (SLOW & STEADY) === */
+        /* === SKILL ICON ANIMATION ONLY === */
         .skill-tag { 
-            background: rgba(255, 255, 255, 0.05); 
+            background: rgba(255, 255, 255, 0.03); 
             border: 1px solid var(--glass-border); 
-            padding: 10px 18px; border-radius: 8px; 
-            font-size: 13px; display: inline-flex; align-items: center; gap: 8px; 
-            margin: 6px;
-            animation: gentleFloat 8s infinite ease-in-out; /* Very slow */
+            padding: 8px 16px; border-radius: 8px; 
+            display: inline-flex; align-items: center; gap: 10px; margin: 5px;
+            transition: 0.3s;
         }
-
-        @keyframes gentleFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+        /* Only the icon inside moves */
+        .skill-tag i {
+            color: var(--secondary-glow);
+            animation: iconPulse 3s infinite ease-in-out;
         }
-
-        .skill-tag:hover {
-            border-color: var(--secondary-glow);
-            background: rgba(0, 242, 254, 0.1);
-            transform: scale(1.05) !important;
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
         }
+        .skill-tag:hover { background: rgba(79, 172, 254, 0.1); border-color: var(--primary-glow); }
 
-        /* --- UI COMPONENTS --- */
+        /* --- UI STRUCTURE --- */
+        nav, section, footer { position: relative; z-index: 10; }
         h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
         .gradient-text { background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        nav { position: fixed; top: 0; width: 100%; padding: 25px 10%; display: flex; justify-content: space-between; align-items: center; background: rgba(3, 3, 5, 0.85); backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid var(--glass-border); }
+        nav { position: fixed; top: 0; width: 100%; padding: 20px 8%; display: flex; justify-content: space-between; align-items: center; background: rgba(3, 3, 5, 0.8); backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid var(--glass-border); }
+        .logo { font-size: 22px; font-weight: 700; color: #fff; text-decoration: none; }
         
         section { padding: 120px 10%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        .hero h1 { font-size: clamp(40px, 8vw, 75px); line-height: 1.1; margin-bottom: 20px; }
-        .hero-avatar { width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--primary-glow); margin-bottom: 20px; object-fit: cover; display: none; }
+        .hero h1 { font-size: clamp(35px, 7vw, 65px); line-height: 1.1; margin-bottom: 20px; }
+        .hero-avatar { width: 110px; height: 110px; border-radius: 50%; border: 2px solid var(--primary-glow); margin-bottom: 20px; object-fit: cover; display: none; }
         
-        .glass-card { background: rgba(15, 15, 25, 0.7); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 24px; padding: 40px; }
+        .glass-card { background: rgba(15, 15, 20, 0.7); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 35px; }
         
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 50px; }
-        .project-card { background: rgba(20, 20, 30, 0.8); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; transition: 0.4s; }
-        .project-card:hover { border-color: var(--secondary-glow); transform: translateY(-10px); }
-        .project-img { height: 220px; background-size: cover; background-position: center; }
-        .project-content { padding: 25px; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 40px; }
+        .project-card { background: rgba(10, 10, 15, 0.8); border: 1px solid var(--glass-border); border-radius: 15px; overflow: hidden; transition: 0.3s; }
+        .project-card:hover { border-color: var(--primary-glow); transform: translateY(-5px); }
+        .project-img { height: 200px; background-size: cover; background-position: center; }
+        .project-content { padding: 20px; }
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: 1.2s all ease; }
+        .reveal { opacity: 0; transform: translateY(20px); transition: 0.8s all ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
-    <div id="tech-bg-container"></div>
+    <div id="tech-bg"></div>
 
     <nav>
-        <a href="#" class="logo" id="navLogo" style="color:white; text-decoration:none; font-weight:bold; font-size:24px;">DEV</a>
-        <div style="display: flex; gap: 30px;">
-            <a href="#about" style="color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500;">ABOUT</a>
-            <a href="#projects" style="color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500;">PROJECTS</a>
+        <a href="#" class="logo" id="navLogo">PORTFOLIO</a>
+        <div style="display: flex; gap: 20px;">
+            <a href="#about" style="color: var(--text-muted); text-decoration: none; font-size: 14px;">About</a>
+            <a href="#projects" style="color: var(--text-muted); text-decoration: none; font-size: 14px;">Projects</a>
         </div>
     </nav>
 
     <section class="hero" id="home">
         <div class="reveal active">
             <img id="displayPhoto" class="hero-avatar" src="" alt="Profile">
-            <h4 id="displayCourse" style="color: var(--secondary-glow); letter-spacing: 3px; margin-bottom: 10px; font-size: 14px;"></h4>
+            <div id="displayCourse" style="color: var(--secondary-glow); font-size: 13px; letter-spacing: 2px; margin-bottom: 10px;"></div>
             <h1>Hi, I'm <span id="displayName" style="color:#fff;">...</span>.<br>I specialize in <span class="gradient-text" id="typewriter"></span></h1>
-            <p id="displayJourney" style="max-width: 650px; color: var(--text-muted); font-size: 18px; line-height: 1.8; margin-top: 20px;"></p>
+            <p id="displayJourney" style="max-width: 600px; color: var(--text-muted); margin-top: 20px; font-size: 16px;"></p>
         </div>
     </section>
 
     <section id="about">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
             <div class="glass-card reveal">
-                <h3 style="color: var(--secondary-glow); margin-bottom: 25px;">Expertise</h3>
+                <h3 style="margin-bottom: 20px; font-size: 22px;">Technical Skills</h3>
                 <div id="skillsContainer"></div>
             </div>
-            <div class="glass-card reveal" style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
-                <i class="fa-solid fa-robot" style="font-size: 50px; color: var(--primary-glow); margin-bottom: 20px;"></i>
-                <h3>AI & Robotics</h3>
-                <p style="color: var(--text-muted); margin-top: 15px;">Focusing on autonomous systems, machine learning pipelines, and hardware integration.</p>
+            <div class="glass-card reveal" style="display: flex; flex-direction: column; justify-content: center;">
+                <h3 style="margin-bottom: 15px;">Development Focus</h3>
+                <p style="color: var(--text-muted);">Integrating clean code with intelligent Machine Learning models and Robotics automation.</p>
             </div>
         </div>
     </section>
 
     <section id="projects">
-        <h2 class="reveal" style="font-size: 36px; margin-bottom: 10px;">Portfolio</h2>
+        <h2 class="reveal" style="margin-bottom: 30px;">Featured Work</h2>
         <div class="projects-grid" id="projectsContainer"></div>
     </section>
 
-    <footer style="padding: 80px; text-align: center; border-top: 1px solid var(--glass-border);">
-        <p id="footerName" style="color: var(--text-muted); opacity: 0.6;"></p>
+    <footer style="padding: 50px; text-align: center; border-top: 1px solid var(--glass-border);">
+        <p id="footerName" style="color: var(--text-muted); font-size: 13px;"></p>
     </footer>
 
     <script>
-        // 1. RE-ENGINEERED TECH BACKGROUND (VISIBLE & SPECIFIC)
+        // 1. GHOST TECH BACKGROUND (CODE, ML, ROBOTICS)
         function initTechBackground() {
-            const container = document.getElementById('tech-bg-container');
-            // Specific content types
-            const codeTags = ['0101', 'if()', 'while{}', '</>', '[ ]', 'ptr->'];
-            const robotTags = ['⚙️', '🤖', '🦾', 'HUB'];
-            const mlTags = ['Neural', '∑', 'Entropy', 'Vector'];
-
-            for (let i = 0; i < 45; i++) {
-                const el = document.createElement('div');
-                const rand = Math.random();
-
-                if (rand < 0.25) {
-                    el.className = 'floating-element';
-                    el.innerText = codeTags[Math.floor(Math.random() * codeTags.length)];
-                } else if (rand < 0.50) {
-                    el.className = 'floating-element neural-node'; // Neural Network Node
-                } else if (rand < 0.75) {
-                    el.className = 'floating-element';
-                    el.innerText = robotTags[Math.floor(Math.random() * robotTags.length)];
-                    el.style.color = '#fff'; // Robotics white highlight
-                } else {
-                    el.className = 'floating-element';
-                    el.innerText = mlTags[Math.floor(Math.random() * mlTags.length)];
-                    el.style.color = 'var(--secondary-glow)';
-                }
-
+            const bg = document.getElementById('tech-bg');
+            const items = ['{ }', '</>', '🤖', '⚙️', '∑', 'μ', '0101', 'λ', 'ptr'];
+            for (let i = 0; i < 35; i++) {
+                let el = document.createElement('div');
+                el.className = 'bg-symbol';
+                el.innerText = items[Math.floor(Math.random() * items.length)];
                 el.style.left = Math.random() * 100 + 'vw';
-                el.style.fontSize = (Math.random() * 18 + 12) + 'px';
-                el.style.animationDuration = (Math.random() * 15 + 12) + 's';
-                el.style.animationDelay = (Math.random() * 8) + 's';
-                container.appendChild(el);
+                el.style.fontSize = (Math.random() * 15 + 12) + 'px';
+                el.style.animationDuration = (Math.random() * 25 + 15) + 's';
+                el.style.animationDelay = (Math.random() * 15) + 's';
+                bg.appendChild(el);
             }
         }
 
-        // 2. DATA LOAD & RESTORE
+        // 2. DATA LOAD (ORIGINAL MAPPING)
         let typewriterWords = [];
         document.addEventListener("DOMContentLoaded", () => {
             initTechBackground();
             fetch('data.json')
                 .then(res => res.json())
                 .then(data => {
+                    // Mapping original JSON keys
                     document.getElementById('navLogo').innerText = data.profile.fullName.split(' ')[0].toUpperCase();
                     document.getElementById('displayName').innerText = data.profile.fullName;
                     document.getElementById('displayCourse').innerText = data.profile.courseTitle;
                     document.getElementById('displayJourney').innerText = data.profile.journeyText;
-                    document.getElementById('footerName').innerText = data.profile.fullName;
+                    document.getElementById('footerName').innerText = `© ${data.profile.fullName}`;
                     
                     if(data.profile.photoUrl) {
                         const img = document.getElementById('displayPhoto');
@@ -213,31 +165,31 @@
                         img.style.display = 'block';
                     }
 
-                    typewriterWords = data.typewriterWords || ["AI Specialist"];
+                    typewriterWords = data.typewriterWords || ["Software Engineer"];
                     startTypewriter();
 
-                    // Render Skills
-                    const skillCont = document.getElementById('skillsContainer');
+                    // Skills (Icon animation only)
+                    const skillContainer = document.getElementById('skillsContainer');
                     data.skills.forEach(cat => {
-                        let html = `<div style="margin-bottom:20px"><strong style="color:var(--primary-glow); font-size:12px; display:block; margin-bottom:10px;">${cat.category}</strong>`;
+                        let div = document.createElement('div');
+                        div.style.marginBottom = "15px";
+                        div.innerHTML = `<small style="color:var(--primary-glow); font-weight:bold; display:block; margin-bottom:5px;">${cat.category}</small>`;
                         cat.items.forEach(s => {
-                            const delay = (Math.random() * -8).toFixed(1);
-                            html += `<span class="skill-tag" style="animation-delay: ${delay}s;"><i class="${s.icon}"></i> ${s.name}</span>`;
+                            div.innerHTML += `<span class="skill-tag"><i class="${s.icon}"></i> ${s.name}</span>`;
                         });
-                        html += `</div>`;
-                        skillCont.innerHTML += html;
+                        skillContainer.appendChild(div);
                     });
 
-                    // Render Projects
-                    const projCont = document.getElementById('projectsContainer');
+                    // Projects
+                    const projContainer = document.getElementById('projectsContainer');
                     data.projects.forEach(p => {
-                        projCont.innerHTML += `
+                        projContainer.innerHTML += `
                             <div class="project-card reveal">
                                 <div class="project-img" style="background-image: url('${p.imageUrl}')"></div>
                                 <div class="project-content">
-                                    <h4 style="font-size:20px; margin-bottom:10px;">${p.title}</h4>
-                                    <p style="color:var(--text-muted); font-size:14px; margin-bottom:20px;">${p.description}</p>
-                                    <a href="${p.linkUrl}" target="_blank" style="color:var(--secondary-glow); text-decoration:none; font-weight:bold; font-size:14px;">VIEW CASE STUDY →</a>
+                                    <h4 style="margin-bottom:8px;">${p.title}</h4>
+                                    <p style="font-size:13px; color:var(--text-muted); margin-bottom:15px;">${p.description}</p>
+                                    <a href="${p.linkUrl}" target="_blank" style="color:var(--primary-glow); text-decoration:none; font-size:13px; font-weight:bold;">View Project</a>
                                 </div>
                             </div>
                         `;
@@ -252,8 +204,8 @@
             const current = typewriterWords[wordIdx];
             el.textContent = isDeleting ? current.substring(0, charIdx - 1) : current.substring(0, charIdx + 1);
             charIdx = isDeleting ? charIdx - 1 : charIdx + 1;
-            let speed = isDeleting ? 40 : 120;
-            if (!isDeleting && charIdx === current.length) { speed = 2500; isDeleting = true; }
+            let speed = isDeleting ? 50 : 120;
+            if (!isDeleting && charIdx === current.length) { speed = 2000; isDeleting = true; }
             else if (isDeleting && charIdx === 0) { isDeleting = false; wordIdx = (wordIdx + 1) % typewriterWords.length; speed = 600; }
             setTimeout(startTypewriter, speed);
         }
