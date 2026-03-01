@@ -17,27 +17,60 @@
     {
       "category": "Programming & Core Concepts",
       "items": [
-        { "icon": "fa-brands fa-java", "name": "Java" },
-        { "icon": "fa-solid fa-c", "name": "C++" },
-        { "icon": "fa-brands fa-python", "name": "Python" },
-        { "icon": "fa-solid fa-code", "name": "OOP" },
-        { "icon": "fa-solid fa-cubes", "name": "Data Structures" }
+        {
+          "icon": "fa-brands fa-java",
+          "name": "Java"
+        },
+        {
+          "icon": "fa-solid fa-c",
+          "name": "C++"
+        },
+        {
+          "icon": "fa-brands fa-python",
+          "name": "Python"
+        },
+        {
+          "icon": "fa-solid fa-code",
+          "name": "OOP"
+        },
+        {
+          "icon": "fa-solid fa-cubes",
+          "name": "Data Structures"
+        }
       ]
     },
     {
       "category": "AI & Robotics",
       "items": [
-        { "icon": "fa-solid fa-brain", "name": "Machine Learning" },
-        { "icon": "fa-solid fa-filter", "name": "Data Preprocessing" },
-        { "icon": "fa-solid fa-robot", "name": "Robotics" }
+        {
+          "icon": "fa-solid fa-brain",
+          "name": "Machine Learning"
+        },
+        {
+          "icon": "fa-solid fa-filter",
+          "name": "Data Preprocessing"
+        },
+        {
+          "icon": "fa-solid fa-robot",
+          "name": "Robotics"
+        }
       ]
     },
     {
       "category": "Database & Tools",
       "items": [
-        { "icon": "fa-solid fa-database", "name": "SQL / MySQL" },
-        { "icon": "fa-brands fa-git-alt", "name": "Git" },
-        { "icon": "fa-solid fa-laptop-code", "name": "IntelliJ / VS Code" }
+        {
+          "icon": "fa-solid fa-database",
+          "name": "SQL / MySQL"
+        },
+        {
+          "icon": "fa-brands fa-git-alt",
+          "name": "Git"
+        },
+        {
+          "icon": "fa-solid fa-laptop-code",
+          "name": "IntelliJ / VS Code"
+        }
       ]
     }
   ],
