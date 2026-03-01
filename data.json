@@ -88,8 +88,8 @@
       "title": "Moviestream (Mobile App)",
       "description": "Moviestream is an Android streaming application currently under active development using Android Studio. The app is designed to provide a smooth, ad-free viewing experience with fast content loading and stable media playback. It integrates a custom backend for dynamic content management and secure streaming. The focus of the project is performance optimization, clean user interface design, and reliable server communication to ensure seamless entertainment on mobile devices.",
       "imageUrl": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&auto=format&fit=crop",
-      "linkUrl": "#",
-      "linkText": "In Development"
+      "linkUrl": "https://kanilkanchana.github.io/Movie-Stream/",
+      "linkText": "About App"
     }
   ]
 }
