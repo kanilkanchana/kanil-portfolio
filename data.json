@@ -6,7 +6,10 @@
     "journeyText": "My foundation in technology began with a Diploma and has rapidly evolved into my 2nd-year HND in Computer Science with Artificial Intelligence at NIBM. I thrive on solving complex computational problems, from untangling advanced mathematics to architecting robust software solutions. Whether I am developing native Android applications, integrating hardware with Arduino, or engineering web platforms, my focus is always on building applications that prioritize performance and user experience.",
     "devFocus": "I am a second-year Higher National Diploma student in Computer Science, actively developing my skills in software and system development. In my first year, I built projects and completed coursework in Java programming, MySQL database design, and HTML web development.\n\nCurrently, I am exploring Machine Learning, Robotics, and IoT, creating small hands-on projects to apply my learning in real-world scenarios. My focus is on building intelligent systems, automation solutions, and connected device applications while continuously improving my coding and development expertise.",
     "contactEmail": "kanilkanchana98@gmail.com",
-    "githubLink": "https://github.com/kanilkanchana"
+    "githubLink": "https://github.com/kanilkanchana",
+    "linkedinLink": "https://linkedin.com/in/yourusername",
+    "phone": "+94 7X XXX XXXX",
+    "showPhone": true
   },
   "typewriterWords": [
     "Intelligent Systems Development",
@@ -24,60 +27,27 @@
     {
       "category": "Programming & Core Concepts",
       "items": [
-        {
-          "icon": "fa-brands fa-java",
-          "name": "Java"
-        },
-        {
-          "icon": "fa-solid fa-c",
-          "name": "C++"
-        },
-        {
-          "icon": "fa-brands fa-python",
-          "name": "Python"
-        },
-        {
-          "icon": "fa-solid fa-code",
-          "name": "OOP"
-        },
-        {
-          "icon": "fa-solid fa-cubes",
-          "name": "Data Structures"
-        }
+        { "icon": "fa-brands fa-java", "name": "Java" },
+        { "icon": "fa-solid fa-c", "name": "C++" },
+        { "icon": "fa-brands fa-python", "name": "Python" },
+        { "icon": "fa-solid fa-code", "name": "OOP" },
+        { "icon": "fa-solid fa-cubes", "name": "Data Structures" }
       ]
     },
     {
       "category": "AI & Robotics",
       "items": [
-        {
-          "icon": "fa-solid fa-brain",
-          "name": "Machine Learning"
-        },
-        {
-          "icon": "fa-solid fa-filter",
-          "name": "Data Preprocessing"
-        },
-        {
-          "icon": "fa-solid fa-robot",
-          "name": "Robotics"
-        }
+        { "icon": "fa-solid fa-brain", "name": "Machine Learning" },
+        { "icon": "fa-solid fa-filter", "name": "Data Preprocessing" },
+        { "icon": "fa-solid fa-robot", "name": "Robotics" }
       ]
     },
     {
       "category": "Database & Tools",
       "items": [
-        {
-          "icon": "fa-solid fa-database",
-          "name": "SQL / NoSQL"
-        },
-        {
-          "icon": "fa-brands fa-git-alt",
-          "name": "Git"
-        },
-        {
-          "icon": "fa-solid fa-laptop-code",
-          "name": "IntelliJ / VS Code"
-        }
+        { "icon": "fa-solid fa-database", "name": "SQL / NoSQL" },
+        { "icon": "fa-brands fa-git-alt", "name": "Git" },
+        { "icon": "fa-solid fa-laptop-code", "name": "IntelliJ / VS Code" }
       ]
     }
   ],
