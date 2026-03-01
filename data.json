@@ -8,8 +8,9 @@
     "contactEmail": "kanilkanchana98@gmail.com",
     "githubLink": "https://github.com/kanilkanchana",
     "linkedinLink": "https://linkedin.com/in/yourusername",
-    "phone": "+94 7X XXX XXXX",
-    "showPhone": true
+    "phone": "947XXXXXXXXX",
+    "showPhone": true,
+    "showWhatsApp": true
   },
   "typewriterWords": [
     "Intelligent Systems Development",
