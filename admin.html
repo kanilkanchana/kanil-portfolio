@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Admin Dashboard</title>
+    <title>Live Admin Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -14,15 +14,16 @@
         .header { text-align: center; margin-bottom: 40px; }
         .header h1 { font-size: 28px; color: var(--primary); margin-bottom: 10px; }
         .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 30px; margin-bottom: 30px; }
-        .card h2 { font-size: 18px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+        .card h2 { font-size: 18px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); color: var(--primary); }
         .form-group { margin-bottom: 20px; }
         label { display: block; font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; }
         input, textarea { width: 100%; padding: 12px 15px; background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border); border-radius: 8px; color: white; font-size: 15px; }
         input:focus, textarea:focus { outline: none; border-color: var(--primary); }
-        .btn-live { display: block; width: 100%; padding: 18px; background: #2ed573; color: #000; font-size: 16px; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; transition: 0.2s; }
+        .btn-live { display: block; width: 100%; padding: 18px; background: #2ed573; color: #000; font-size: 16px; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; transition: 0.2s; position: sticky; bottom: 20px; z-index: 100; box-shadow: 0 10px 20px rgba(46, 213, 115, 0.3); }
         .btn-live:hover { background: #26b360; transform: translateY(-2px); }
-        .auth-box { border-left: 4px solid #ff4757; background: rgba(255, 71, 87, 0.1); padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 30px; }
-        .auth-box input { border-color: #ff4757; margin-top: 10px; }
+        .auth-box { border-left: 4px solid #ff4757; background: rgba(255, 71, 87, 0.1); padding: 20px; border-radius: 0 8px 8px 0; margin-bottom: 30px; }
+        .auth-box input { border-color: #ff4757; margin-top: 10px; font-family: monospace; }
+        .help-text { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -30,26 +31,45 @@
     <div class="container">
         <div class="header">
             <h1><i class="fa-solid fa-satellite-dish"></i> Live Admin Dashboard</h1>
-            <p>Push updates directly to your live portfolio on GitHub.</p>
+            <p>Your current data has been loaded. Make your edits below.</p>
         </div>
 
         <div class="auth-box">
             <label style="color: #ff4757;"><i class="fa-solid fa-lock"></i> GitHub Personal Access Token</label>
-            <p style="font-size: 12px; color: #dcdcdc;">Paste your secret GitHub token here to authorize the live update.</p>
+            <p style="font-size: 12px; color: #dcdcdc;">Paste your token here to authorize the save. It will not be stored.</p>
             <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
         </div>
 
         <div class="card">
-            <h2>Profile Information</h2>
-            <div class="form-group"><label>Full Name</label><input type="text" id="fullName" value="Kanil Kanchana"></div>
-            <div class="form-group"><label>Course Title & Year</label><input type="text" id="courseTitle" value="BSc (Hons) Computer Science & AI"></div>
-            <div class="form-group"><label>Profile Photo URL</label><input type="text" id="photoUrl" value="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200&auto=format&fit=crop"></div>
-            <div class="form-group"><label>About Me (Bio)</label><textarea id="bioText" rows="4">I am a second-year undergraduate at NIBM, currently completing my Higher National Diploma (HND) and transitioning into my final degree year. I specialize in bridging the gap between clean code, intelligent systems, and user-centric software architecture.</textarea></div>
+            <h2>1. Profile & Journey</h2>
+            <div class="form-group"><label>Full Name</label><input type="text" id="fullName"></div>
+            <div class="form-group"><label>Course Title & Year</label><input type="text" id="courseTitle"></div>
+            <div class="form-group"><label>Profile Photo URL</label><input type="text" id="photoUrl"></div>
+            <div class="form-group"><label>The Journey (About Me)</label><textarea id="journeyText" rows="6"></textarea></div>
         </div>
 
         <div class="card">
-            <h2>Projects Database (JSON)</h2>
-            <div class="form-group"><textarea id="projectsJson" rows="15" style="font-family: monospace; font-size: 13px;"></textarea></div>
+            <h2>2. Let's Connect (Links)</h2>
+            <div class="form-group"><label>Contact Email</label><input type="text" id="contactEmail"></div>
+            <div class="form-group"><label>GitHub URL</label><input type="text" id="githubLink"></div>
+        </div>
+
+        <div class="card">
+            <h2>3. Typewriter Words ("I build...")</h2>
+            <p class="help-text">Edit the JSON array below to change the typing animation text.</p>
+            <div class="form-group"><textarea id="typewriterJson" rows="6" style="font-family: monospace;"></textarea></div>
+        </div>
+
+        <div class="card">
+            <h2>4. Technical Arsenal (Skills)</h2>
+            <p class="help-text">Edit your skill categories and icons here.</p>
+            <div class="form-group"><textarea id="skillsJson" rows="15" style="font-family: monospace;"></textarea></div>
+        </div>
+
+        <div class="card">
+            <h2>5. Featured Projects</h2>
+            <p class="help-text">Add, edit, or remove your projects here.</p>
+            <div class="form-group"><textarea id="projectsJson" rows="20" style="font-family: monospace;"></textarea></div>
         </div>
 
         <button class="btn-live" id="updateBtn" onclick="pushLiveUpdate()">
@@ -58,14 +78,33 @@
     </div>
 
     <script>
-        // Default Projects array
-        const defaultProjects = [
-            { "id": 1, "title": "Moviestream / CineVault", "description": "A premium movie database and streaming platform built from the ground up to provide a 100% ad-free cinematic experience for users.", "imageUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=800&auto=format&fit=crop", "linkUrl": "http://moviestream.xo.je/", "linkText": "Live Demo" },
-            { "id": 2, "title": "Wahera (Mobile App)", "description": "The official companion Android application for Moviestream, actively being developed using Android Studio to bring seamless streaming to mobile devices.", "imageUrl": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&auto=format&fit=crop", "linkUrl": "#", "linkText": "In Development" }
-        ];
-        document.getElementById('projectsJson').value = JSON.stringify(defaultProjects, null, 4);
+        // Automatically load existing data when the admin page opens
+        document.addEventListener("DOMContentLoaded", async function() {
+            try {
+                // Fetch the live JSON file directly from your website
+                const response = await fetch('data.json');
+                if (!response.ok) throw new Error("Could not load current data.");
+                const data = await response.json();
 
-        // --- GITHUB API LIVE UPDATE LOGIC ---
+                // Fill in the input boxes
+                document.getElementById('fullName').value = data.profile.fullName;
+                document.getElementById('courseTitle').value = data.profile.courseTitle;
+                document.getElementById('photoUrl').value = data.profile.photoUrl;
+                document.getElementById('journeyText').value = data.profile.journeyText;
+                document.getElementById('contactEmail').value = data.profile.contactEmail;
+                document.getElementById('githubLink').value = data.profile.githubLink;
+
+                // Fill in the JSON text areas
+                document.getElementById('typewriterJson').value = JSON.stringify(data.typewriterWords, null, 4);
+                document.getElementById('skillsJson').value = JSON.stringify(data.skills, null, 4);
+                document.getElementById('projectsJson').value = JSON.stringify(data.projects, null, 4);
+
+            } catch (error) {
+                console.error("No existing data found or running locally without a server.");
+            }
+        });
+
+        // Push updates back to GitHub
         async function pushLiveUpdate() {
             const token = document.getElementById('githubToken').value.trim();
             const btn = document.getElementById('updateBtn');
@@ -75,7 +114,7 @@
                 return;
             }
 
-            // Your GitHub Details
+            // Important: Make sure these match your actual GitHub username and repository name!
             const owner = "kanilkanchana";
             const repo = "kanil-portfolio";
             const path = "data.json";
@@ -84,33 +123,36 @@
                 btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Pushing to GitHub...';
                 btn.style.pointerEvents = 'none';
 
-                // 1. Gather all your data from the form
+                // 1. Gather all data from the form
                 const finalDatabase = {
                     profile: {
                         fullName: document.getElementById('fullName').value,
                         courseTitle: document.getElementById('courseTitle').value,
-                        bioText: document.getElementById('bioText').value,
-                        photoUrl: document.getElementById('photoUrl').value
+                        photoUrl: document.getElementById('photoUrl').value,
+                        journeyText: document.getElementById('journeyText').value,
+                        contactEmail: document.getElementById('contactEmail').value,
+                        githubLink: document.getElementById('githubLink').value
                     },
+                    typewriterWords: JSON.parse(document.getElementById('typewriterJson').value),
+                    skills: JSON.parse(document.getElementById('skillsJson').value),
                     projects: JSON.parse(document.getElementById('projectsJson').value)
                 };
 
-                // Convert data to Base64 (GitHub requires this format)
+                // Base64 encode the content for GitHub
                 const contentStr = JSON.stringify(finalDatabase, null, 2);
                 const encodedContent = btoa(unescape(encodeURIComponent(contentStr)));
 
-                // 2. Fetch the current 'SHA' of data.json (GitHub needs this to overwrite a file)
+                // 2. Fetch the current SHA
                 const getUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
                 const getResponse = await fetch(getUrl, {
                     headers: { 'Authorization': `token ${token}` }
                 });
-                
                 if (!getResponse.ok) throw new Error("Could not find the original data.json file on GitHub. Check your token.");
                 
                 const fileData = await getResponse.json();
                 const fileSha = fileData.sha;
 
-                // 3. PUT (Upload) the new file back to GitHub
+                // 3. PUT the new file to GitHub
                 const putResponse = await fetch(getUrl, {
                     method: 'PUT',
                     headers: {
@@ -131,7 +173,7 @@
                 }
 
             } catch (error) {
-                alert("Error: " + error.message);
+                alert("Error: " + error.message + "\n\n(Tip: If there is a parsing error, check your JSON text areas to make sure you didn't miss a comma or quotation mark!)");
             } finally {
                 btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Push Live Update to GitHub';
                 btn.style.pointerEvents = 'auto';
