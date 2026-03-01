@@ -67,7 +67,7 @@
       "items": [
         {
           "icon": "fa-solid fa-database",
-          "name": "SQL / MySQL"
+          "name": "SQL / MySQL/NoSQL"
         },
         {
           "icon": "fa-brands fa-git-alt",
