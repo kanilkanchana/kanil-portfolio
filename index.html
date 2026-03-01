@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kanil Kanchana | Portfolio</title>
+    <title>Portfolio</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -29,31 +29,27 @@
             line-height: 1.6; 
         }
 
-        /* === NEW TECH / ML / ROBOTICS BACKGROUND === */
-        /* Fixed z-index to 0 so it's guaranteed to be visible behind the content (z-index: 10) */
+        /* === DYNAMIC TECH BACKGROUND === */
         .tech-bg {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: 0;
             overflow: hidden;
             pointer-events: none;
-            background: radial-gradient(circle at center, #0a0a10 0%, var(--bg-base) 100%);
         }
 
         .tech-symbol {
             position: absolute;
             color: var(--primary-glow);
             font-family: 'Space Grotesk', monospace;
-            font-weight: 600;
             opacity: 0;
             animation: floatUp linear infinite;
-            text-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
         }
 
         @keyframes floatUp {
             0% { transform: translateY(110vh) rotate(-10deg); opacity: 0; }
-            10% { opacity: 0.15; }
-            90% { opacity: 0.15; }
+            20% { opacity: 0.2; }
+            80% { opacity: 0.2; }
             100% { transform: translateY(-10vh) rotate(10deg); opacity: 0; }
         }
 
@@ -65,7 +61,6 @@
                 linear-gradient(rgba(79, 172, 254, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(79, 172, 254, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
-            pointer-events: none;
             animation: dynamicGrid 20s linear infinite;
         }
 
@@ -73,96 +68,47 @@
             0% { background-position: 0px 0px; }
             100% { background-position: 50px 50px; }
         }
-        /* =========================================== */
 
-        /* Guarantee all content sits on top of the background */
         nav, section, footer { position: relative; z-index: 10; }
 
+        /* --- UI COMPONENTS --- */
         h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
         .gradient-text { background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
         nav { position: fixed; top: 0; width: 100%; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; background: rgba(3, 3, 5, 0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 100; border-bottom: 1px solid var(--glass-border); }
         .logo { font-size: 24px; font-weight: 700; color: var(--text-main); text-decoration: none; }
         .nav-links { display: flex; gap: 30px; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.3s; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: 0.3s; }
         .nav-links a:hover { color: var(--secondary-glow); }
         
         section { padding: 120px 10%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        .section-title { font-size: 36px; margin-bottom: 50px; display: flex; align-items: center; gap: 15px; }
-        .section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--glass-border), transparent); }
-        
-        .hero-avatar { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--primary-glow); margin-bottom: 20px; object-fit: cover; box-shadow: 0 0 30px rgba(79, 172, 254, 0.4); display: none; }
-        .hero { align-items: flex-start; }
-        .hero-badge { background: rgba(79, 172, 254, 0.1); border: 1px solid rgba(79, 172, 254, 0.2); padding: 8px 16px; border-radius: 50px; font-size: 13px; color: var(--secondary-glow); margin-bottom: 25px; display: inline-block; }
         .hero h1 { font-size: 65px; line-height: 1.1; margin-bottom: 20px; }
-        .hero p { font-size: 18px; color: var(--text-muted); max-width: 650px; margin-bottom: 40px; }
-        .typewriter-text { border-right: 2px solid var(--secondary-glow); padding-right: 5px; animation: blink 0.75s step-end infinite; }
-        @keyframes blink { 50% { border-color: transparent; } }
+        .hero-avatar { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--primary-glow); margin-bottom: 20px; object-fit: cover; display: none; }
         
-        .btn-group { display: flex; gap: 20px; }
-        .btn { padding: 15px 30px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; font-size: 15px; }
-        .btn-primary { background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow)); color: #000; box-shadow: 0 10px 20px rgba(0, 242, 254, 0.2); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0, 242, 254, 0.4); }
-        .btn-outline { border: 1px solid var(--text-muted); color: var(--text-main); }
-        .btn-outline:hover { border-color: var(--text-main); background: rgba(255,255,255,0.05); }
-        
-        .scroll-down { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); font-size: 28px; color: var(--text-muted); text-decoration: none; animation: bounce 2s infinite; transition: color 0.3s, text-shadow 0.3s; z-index: 10; }
-        .scroll-down:hover { color: var(--secondary-glow); text-shadow: 0 0 15px var(--secondary-glow); }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-20px) translateX(-50%); } 60% { transform: translateY(-10px) translateX(-50%); } }
-
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch; }
-        .glass-card { background: var(--bg-surface); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 40px; transition: transform 0.4s, box-shadow 0.4s; }
-        .glass-card:hover { transform: translateY(-5px); border-color: rgba(79, 172, 254, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
-        
-        /* === FIXED & UPGRADED SKILL TAGS === */
-        .skill-category { margin-bottom: 20px; }
-        .skill-category-title { font-size: 14px; color: var(--secondary-glow); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: 600; }
-        .skills-container { display: flex; flex-wrap: wrap; gap: 10px; }
-        
+        /* === FLOATING SKILL TAGS === */
         .skill-tag { 
             background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); 
             padding: 8px 16px; border-radius: 6px; font-size: 13px; display: inline-flex; align-items: center; gap: 8px; 
-            transition: all 0.3s ease;
-            animation: floatShake 4s infinite ease-in-out; 
-            transform-origin: center;
+            animation: floatShake 4s infinite ease-in-out;
         }
-        
-        /* Stops the shake and pops out when you hover over it */
-        .skill-tag:hover { 
-            background: rgba(79, 172, 254, 0.15); border-color: var(--secondary-glow); color: var(--text-main); 
-            animation: none !important; /* Forces the animation to stop */
-            transform: translateY(-5px) scale(1.08) !important;
-            box-shadow: 0 10px 20px rgba(0, 242, 254, 0.2);
-        }
-
-        /* Upgraded, more noticeable shake */
         @keyframes floatShake {
-            0%   { transform: translateY(0px) rotate(0deg); }
-            25%  { transform: translateY(-3px) rotate(1.5deg); }
-            50%  { transform: translateY(0px) rotate(0deg); }
-            75%  { transform: translateY(3px) rotate(-1.5deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-5px) rotate(1deg); }
         }
-        /* =================================== */
-        
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
-        .project-card { background: var(--bg-surface); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 16px; overflow: hidden; transition: all 0.4s; position: relative; animation: fadeUp 0.8s ease forwards; opacity: 0; }
-        .project-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.6); border-color: rgba(79, 172, 254, 0.4); }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        .project-img { height: 220px; background-size: cover; background-position: center; border-bottom: 1px solid var(--glass-border); }
-        .project-content { padding: 30px; }
-        .project-title { font-size: 22px; margin-bottom: 10px; color: var(--text-main); }
-        .project-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.7; }
-        .project-links { display: flex; gap: 15px; align-items: center; flex-wrap: wrap; }
-        .project-links a { color: var(--secondary-glow); text-decoration: none; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; transition: opacity 0.3s; }
-        .project-links a:hover { opacity: 0.8; }
-        
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .skill-tag:hover { animation: none; transform: scale(1.1); border-color: var(--secondary-glow); background: rgba(79, 172, 254, 0.1); }
+
+        .scroll-down { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); font-size: 28px; animation: bounce 2s infinite; color: var(--text-muted); }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-15px) translateX(-50%); } }
+
+        .glass-card { background: var(--bg-surface); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 20px; padding: 40px; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .project-card { background: var(--bg-surface); border-radius: 15px; overflow: hidden; border: 1px solid var(--glass-border); transition: 0.3s; }
+        .project-card:hover { transform: translateY(-10px); border-color: var(--primary-glow); }
+        .project-img { height: 200px; background-size: cover; background-position: center; }
+        .project-content { padding: 20px; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s all ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
-        
-        footer { text-align: center; padding: 40px; border-top: 1px solid var(--glass-border); color: var(--text-muted); font-size: 14px; background: rgba(3, 3, 5, 0.8); }
-        
-        @media (max-width: 900px) { .hero h1 { font-size: 45px; } .about-grid { grid-template-columns: 1fr; } nav { padding: 20px; } .nav-links { display: none; } section { padding: 100px 20px; } .scroll-down { bottom: 20px; } }
     </style>
 </head>
 <body>
@@ -171,7 +117,7 @@
     <div class="bg-grid"></div>
 
     <nav>
-        <a href="#" class="logo" id="navLogo">Loading...</a>
+        <a href="#" class="logo" id="navLogo">Portfolio</a>
         <div class="nav-links">
             <a href="#about">About</a>
             <a href="#projects">Projects</a>
@@ -181,181 +127,130 @@
 
     <section class="hero" id="home">
         <div class="reveal active">
-            <img id="displayPhoto" class="hero-avatar" src="" alt="Profile Photo">
-            <div class="hero-badge"><i class="fa-solid fa-graduation-cap"></i> <span id="displayCourse">Loading Course...</span></div>
-            <h1>Hi, I'm <span id="displayName" style="color:white;">...</span>.<br>I build <span class="gradient-text typewriter-text" id="typewriter"></span></h1>
-            <div class="btn-group">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
-                <a href="#contact" class="btn btn-outline" id="btnContactEmail">Contact Me</a>
+            <img id="displayPhoto" class="hero-avatar" src="" alt="Profile">
+            <div id="displayCourse" style="color: var(--secondary-glow); margin-bottom: 10px;"></div>
+            <h1>Hi, I'm <span id="displayName" style="color:white;">User</span>.<br>I build <span class="gradient-text" id="typewriter"></span></h1>
+            <div style="margin-top: 30px;">
+                <a href="#projects" style="background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow)); padding: 12px 25px; border-radius: 8px; color: black; text-decoration: none; font-weight: bold;">View My Work</a>
             </div>
         </div>
-        
-        <a href="#about" class="scroll-down">
-            <i class="fa-solid fa-chevron-down"></i>
-        </a>
+        <a href="#about" class="scroll-down"><i class="fa-solid fa-chevron-down"></i></a>
     </section>
 
     <section id="about">
-        <h2 class="section-title reveal">Academic & Technical Profile</h2>
-        <div class="about-grid">
-            <div class="glass-card reveal">
-                <h3 style="margin-bottom: 15px; font-size: 24px;">The Journey</h3>
-                <p id="displayJourney" style="color: var(--text-muted); line-height: 1.8;">Loading bio...</p>
+        <div class="reveal" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+            <div class="glass-card">
+                <h3>About Me</h3>
+                <p id="displayJourney" style="margin-top: 15px; color: var(--text-muted);"></p>
             </div>
-
-            <div class="glass-card reveal">
-                <h3 style="margin-bottom: 25px; font-size: 24px;">Technical Arsenal</h3>
-                <div id="skillsContainer"></div>
+            <div class="glass-card">
+                <h3>Skills</h3>
+                <div id="skillsContainer" style="margin-top: 15px;"></div>
             </div>
         </div>
     </section>
 
     <section id="projects">
-        <h2 class="section-title reveal">Featured Projects</h2>
+        <h2 style="margin-bottom: 40px;">Projects</h2>
         <div class="projects-grid" id="projectsContainer"></div>
     </section>
 
-    <section id="contact" style="min-height: 50vh; text-align: center; align-items: center;">
-        <div class="glass-card reveal" style="max-width: 600px; width: 100%;">
-            <h2 style="font-size: 36px; margin-bottom: 20px;">Let's Connect.</h2>
-            <p style="color: var(--text-muted); margin-bottom: 30px;">Whether you want to discuss AI integration, collaborate on a new project, or just talk code, my inbox is always open.</p>
-            <a href="#" id="actionContactEmail" class="btn btn-primary" style="display: inline-block;">Say Hello</a>
-            <div style="margin-top: 30px; display: flex; justify-content: center; gap: 20px; font-size: 24px;">
-                <a href="#" id="actionGithub" target="_blank" style="color: var(--text-main); transition: 0.3s;"><i class="fa-brands fa-github"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; <script>document.write(new Date().getFullYear())</script> <span id="footerName">User</span>. Designed <i class="fa-solid fa-code" style="color: var(--primary-glow);"></i></p>
+    <footer style="text-align: center; padding: 50px;">
+        <p id="footerName"></p>
     </footer>
 
     <script>
-        // --- 1. JAVASCRIPT FOR DYNAMIC TECH BACKGROUND ---
-        function createTechBackground() {
+        // 1. Dynamic Tech Background Generator
+        function initTechBg() {
             const bg = document.getElementById('techBg');
-            // Tech, AI, and Coding Symbols
-            const symbols = ['{ }', '</>', '0101', '1010', 'AI', 'ML', '⚙️', '🤖', 'function()', 'null', 'O(n)', 'if(true)', '∑', '∫'];
-            
-            for(let i = 0; i < 35; i++) {
+            const symbols = ['{ }', '</>', '0101', 'AI', 'ML', '🤖', '⚙️', 'function()', 'O(n)', '∑'];
+            for(let i = 0; i < 30; i++) {
                 let el = document.createElement('div');
                 el.className = 'tech-symbol';
                 el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-                
-                // Randomize position, size, and speed
                 el.style.left = Math.random() * 100 + 'vw';
-                el.style.fontSize = (Math.random() * 20 + 12) + 'px';
-                el.style.animationDuration = (Math.random() * 20 + 15) + 's';
+                el.style.animationDuration = (Math.random() * 15 + 10) + 's';
                 el.style.animationDelay = (Math.random() * 10) + 's';
-                
                 bg.appendChild(el);
             }
         }
 
-        // --- 2. DATA FETCH AND ENGINE ---
-        let typewriterWords = ["loading..."];
-
+        // 2. Original Data Loading Restore
+        let typewriterWords = [];
         document.addEventListener("DOMContentLoaded", function() {
-            createTechBackground(); // Initialize the background on load
-            
+            initTechBg();
             fetch('data.json')
-                .then(response => { if (!response.ok) throw new Error(); return response.json(); })
+                .then(res => res.json())
                 .then(data => {
                     document.getElementById('navLogo').innerText = data.profile.fullName.split(' ')[0] + '.';
                     document.getElementById('displayName').innerText = data.profile.fullName;
-                    document.getElementById('footerName').innerText = data.profile.fullName;
                     document.getElementById('displayCourse').innerText = data.profile.courseTitle;
                     document.getElementById('displayJourney').innerText = data.profile.journeyText;
+                    document.getElementById('footerName').innerText = data.profile.fullName;
                     
-                    document.getElementById('displayPhoto').src = data.profile.photoUrl;
-                    document.getElementById('displayPhoto').style.display = "block"; 
-                    
-                    document.getElementById('btnContactEmail').href = "mailto:" + data.profile.contactEmail;
-                    document.getElementById('actionContactEmail').href = "mailto:" + data.profile.contactEmail;
-                    document.getElementById('actionGithub').href = data.profile.githubLink;
-
-                    if (data.typewriterWords && data.typewriterWords.length > 0) {
-                        typewriterWords = data.typewriterWords;
+                    if(data.profile.photoUrl) {
+                        const img = document.getElementById('displayPhoto');
+                        img.src = data.profile.photoUrl;
+                        img.style.display = 'block';
                     }
 
-                    // Skills with Animation Injection
-                    const skillsContainer = document.getElementById('skillsContainer');
-                    data.skills.forEach(skillBlock => {
-                        let skillHtml = `<div class="skill-category"><div class="skill-category-title">${skillBlock.category}</div><div class="skills-container">`;
-                        skillBlock.items.forEach(item => {
-                            // Assign random delay directly to the CSS animation tag
-                            const randomDelay = (Math.random() * 2).toFixed(2);
-                            skillHtml += `<span class="skill-tag" style="animation-delay: -${randomDelay}s;"><i class="${item.icon}"></i> ${item.name}</span>`;
+                    typewriterWords = data.typewriterWords || ["Developer"];
+                    startTypewriter();
+
+                    // Skills Restore
+                    const skillCont = document.getElementById('skillsContainer');
+                    data.skills.forEach(cat => {
+                        let html = `<div style="margin-bottom:15px"><strong style="display:block;margin-bottom:5px;font-size:12px;color:var(--secondary-glow)">${cat.category}</strong>`;
+                        cat.items.forEach(s => {
+                            const delay = (Math.random() * 2).toFixed(2);
+                            html += `<span class="skill-tag" style="margin:5px; animation-delay: -${delay}s;"><i class="${s.icon}"></i> ${s.name}</span>`;
                         });
-                        skillHtml += `</div></div>`;
-                        skillsContainer.innerHTML += skillHtml;
+                        html += `</div>`;
+                        skillCont.innerHTML += html;
                     });
 
-                    // Projects Injection
-                    const projectsContainer = document.getElementById('projectsContainer');
-                    data.projects.forEach(proj => {
-                        const card = document.createElement('div');
-                        card.className = 'project-card';
-                        card.style.animationDelay = `${proj.id * 0.2}s`; 
-
-                        let secondButtonHtml = '';
-                        if (proj.linkUrl2 && proj.linkText2) {
-                            secondButtonHtml = `<a href="${proj.linkUrl2}" target="_blank" style="color: #a0a0ab; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 15px;">${proj.linkText2} <i class="fa-solid fa-circle-info"></i></a>`;
-                        }
-
-                        card.innerHTML = `
-                            <div class="project-img" style="background-image: url('${proj.imageUrl}');"></div>
-                            <div class="project-content">
-                                <h3 class="project-title">${proj.title}</h3>
-                                <p class="project-desc">${proj.description}</p>
-                                <div class="project-links">
-                                    <a href="${proj.linkUrl}" target="${proj.linkUrl !== '#' ? '_blank' : '_self'}">
-                                        ${proj.linkText} <i class="fa-solid fa-arrow-right"></i>
-                                    </a>
-                                    ${secondButtonHtml}
+                    // Projects Restore
+                    const projCont = document.getElementById('projectsContainer');
+                    data.projects.forEach(p => {
+                        projCont.innerHTML += `
+                            <div class="project-card reveal">
+                                <div class="project-img" style="background-image: url('${p.imageUrl}')"></div>
+                                <div class="project-content">
+                                    <h4>${p.title}</h4>
+                                    <p style="font-size:13px; color:var(--text-muted); margin: 10px 0;">${p.description}</p>
+                                    <a href="${p.linkUrl}" target="_blank" style="color:var(--primary-glow); text-decoration:none; font-weight:bold;">View Project</a>
                                 </div>
                             </div>
                         `;
-                        projectsContainer.appendChild(card);
                     });
-                })
-                .catch(err => console.error("Error loading JSON"));
+                });
         });
 
-        // --- 3. TYPEWRITER EFFECT ---
-        let i = 0, charIndex = 0, isDeleting = false;
-        const typeWriterElement = document.getElementById("typewriter");
-
-        function typeEffect() {
-            const currentWord = typewriterWords[i];
+        // 3. Typewriter Logic
+        let wordIdx = 0, charIdx = 0, isDeleting = false;
+        function startTypewriter() {
+            const el = document.getElementById('typewriter');
+            const current = typewriterWords[wordIdx];
             if (isDeleting) {
-                typeWriterElement.textContent = currentWord.substring(0, charIndex - 1);
-                charIndex--;
+                el.textContent = current.substring(0, charIdx - 1);
+                charIdx--;
             } else {
-                typeWriterElement.textContent = currentWord.substring(0, charIndex + 1);
-                charIndex++;
+                el.textContent = current.substring(0, charIdx + 1);
+                charIdx++;
             }
-            let typeSpeed = isDeleting ? 50 : 100;
-            if (!isDeleting && charIndex === currentWord.length) {
-                typeSpeed = 2000; is    Deleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false; i = (i + 1) % typewriterWords.length; typeSpeed = 500;
-            }
-            setTimeout(typeEffect, typeSpeed);
-        }
-        window.onload = () => setTimeout(typeEffect, 1000);
 
-        // --- 4. SCROLL REVEAL ---
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                if (reveals[i].getBoundingClientRect().top < window.innerHeight - 100) {
-                    reveals[i].classList.add("active");
-                }
-            }
+            let speed = isDeleting ? 50 : 150;
+            if (!isDeleting && charIdx === current.length) { speed = 2000; isDeleting = true; }
+            else if (isDeleting && charIdx === 0) { isDeleting = false; wordIdx = (wordIdx + 1) % typewriterWords.length; speed = 500; }
+            setTimeout(startTypewriter, speed);
         }
-        window.addEventListener("scroll", reveal);
-        reveal();
+
+        // 4. Scroll Reveal Logic
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add('active');
+            });
+        });
     </script>
 </body>
 </html>
