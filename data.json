@@ -104,7 +104,7 @@
       "id": 3,
       "title": "Country Segmentation for Fund Allocation",
       "description": "An interactive machine learning dashboard that analyzes 167 countries using K-Means clustering, PCA, and socio-economic indicators to identify humanitarian funding priorities. Built with Python and Streamlit.",
-      "imageUrl": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?q=80&w=800&auto=format&fit=crop",
+      "imageUrl": "https://kanilkanchana.github.io/kanil-portfolio/Screenshot%202026-07-06%20212256.png",
       "linkUrl": "https://app-dashboard-9s4vdnuvvwtoq5jl6bvcd7.streamlit.app/"
     }
   ]
