@@ -88,17 +88,24 @@
   "projects": [
     {
       "id": 1,
-      "title": "Moviestream",
-      "description": "A premium movie database and streaming platform built from the ground up to provide a 100% ad-free cinematic experience for users.",
+      "title": "MovieStream",
+      "description": "A full-stack movie streaming platform built with HTML, CSS, JavaScript, PHP, and MySQL. Features include movie browsing, category-based navigation, advanced search, movie detail pages, streaming servers, user ratings, audience reviews, download links, authentication, responsive design, and a modern dark-themed interface.",
       "imageUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=800&auto=format&fit=crop",
       "linkUrl": "https://moviestream.my/"
     },
     {
       "id": 2,
-      "title": "Moviestream (Mobile App)",
-      "description": "Android streaming application built with performance optimization, clean UI, and custom backend integration.",
+      "title": "MovieStream (Mobile App)",
+      "description": "Android streaming application built with performance optimization, a clean user interface, and seamless backend integration for an enhanced mobile entertainment experience.",
       "imageUrl": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&auto=format&fit=crop",
       "linkUrl": "https://kanilkanchana.github.io/Movie-Stream/"
+    },
+    {
+      "id": 3,
+      "title": "Country Segmentation for Fund Allocation",
+      "description": "An interactive machine learning dashboard that analyzes 167 countries using K-Means clustering, PCA, and socio-economic indicators to identify humanitarian funding priorities. Built with Python and Streamlit.",
+      "imageUrl": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?q=80&w=800&auto=format&fit=crop",
+      "linkUrl": "https://app-dashboard-9s4vdnuvvwtoq5jl6bvcd7.streamlit.app/"
     }
   ]
 }
